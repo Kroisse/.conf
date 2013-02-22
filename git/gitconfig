@@ -1,0 +1,23 @@
+[user]
+	name = Eunchong Yu
+	email = kroisse@gmail.com
+[alias]
+	ci = commit
+	co = checkout
+	s = status
+	sta = status
+	d = diff
+	di = diff
+	ds = diff --staged
+	staged = diff --staged
+	l = log --graph
+	b = branch
+	br = branch -r
+[color]
+	ui = auto
+[core]
+	autocrlf = false
+	excludesfile = ~/.gitignore
+	editor = /usr/local/bin/emacsclient
+[merge]
+	tool = opendiff
