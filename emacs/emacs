@@ -54,7 +54,6 @@
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(css-indent-offset 2)
- '(custom-enabled-themes (quote (wombat)))
  '(desktop-path (quote ("~")))
  '(desktop-save-mode t)
  '(fill-column 80)
@@ -121,6 +120,8 @@
 (add-to-list 'auto-mode-alist '("\\.css\\'" . css-mode))
 (add-to-list 'auto-mode-alist '("\\.less$" . css-mode))
 
+
+(color-theme-solarized-light)
 (set-frame-size-according-to-resolution)
 ;;(set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>]))
 (let ((alpha '(90 67)))
