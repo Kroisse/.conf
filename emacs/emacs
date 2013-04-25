@@ -78,7 +78,7 @@
  '(nxhtml-default-encoding (quote utf-8))
  '(nxhtml-skip-welcome t)
  '(overflow-newline-into-fringe t)
- '(python-check-command "flake8 --ignore=E127,E128,E301")
+ '(python-check-command "flake8")
  '(rst-level-face-base-color "#888")
  '(rst-level-face-base-light 85)
  '(scss-compile-at-save nil)
