@@ -69,7 +69,6 @@
  '(js2-include-gears-externs nil)
  '(js2-include-rhino-externs nil)
  '(linum-format "%3d ")
- '(menu-bar-mode t)
  '(mouse-wheel-progressive-speed nil)
  '(mumamo-chunk-coloring 2)
  '(mumamo-set-major-mode-delay 0.1)
@@ -81,8 +80,10 @@
  '(python-check-command "flake8")
  '(rst-level-face-base-color "#888")
  '(rst-level-face-base-light 85)
+ '(safe-local-variable-values (quote ((buffer-file-coding-system . utf-8-unix))))
  '(scss-compile-at-save nil)
  '(server-mode t)
+ '(show-paren-mode t)
  '(term-exec-hook (quote (set-buffer-process-coding-system-utf-8-unix)))
  '(tool-bar-mode nil)
  '(uniquify-buffer-name-style (quote post-forward) nil (uniquify))
@@ -118,7 +119,8 @@
 (autoload 'css-mode "css-mode" "" t)
 (autoload 'css-color-mode "mon-css-color""" t)
 (add-to-list 'auto-mode-alist '("\\.css\\'" . css-mode))
-(add-to-list 'auto-mode-alist '("\\.less$" . css-mode))
+(add-to-list 'auto-mode-alist '("\\.less\\'" . css-mode))
+(add-to-list 'auto-mode-alist '("templates/.*\\.html\\'" . jinja-mode))
 
 
 (color-theme-solarized-light)
