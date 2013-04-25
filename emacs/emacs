@@ -23,10 +23,6 @@
                 (getenv "PATH")))
 (setq exec-path (append exec-path '("/usr/local/bin")))
 
-(when (>= emacs-major-version 23)
-  (load (concat (file-name-as-directory site-lisp-dir) "nxhtml/autostart"))
-  (require 'jinja))
-
 (defun frame-size-according-to-size (width height)
   (let ((width (cond ((>= width 1280) 165)
                            ((>= width 1024) 120)
@@ -45,11 +41,6 @@
 					      (x-display-pixel-height))))
       (dolist (elem size)
         (add-to-list 'default-frame-alist elem)))))
-
-;;(set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>]))
-(let ((alpha '(90 67)))
-  (set-frame-parameter (selected-frame) 'alpha alpha)
-  (add-to-list 'default-frame-alist (cons 'alpha alpha)))
 
 (defun set-buffer-process-coding-system-utf-8-unix ()
   (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))
@@ -120,6 +111,10 @@
 
 (show-paren-mode t)
 
+(when (>= emacs-major-version 23)
+  (load (concat (file-name-as-directory site-lisp-dir) "nxhtml/autostart"))
+  (require 'jinja))
+
 (add-hook 'css-mode-hook 'css-color-mode)
 (autoload 'css-mode "css-mode" "" t)
 (autoload 'css-color-mode "mon-css-color""" t)
@@ -127,6 +122,10 @@
 (add-to-list 'auto-mode-alist '("\\.less$" . css-mode))
 
 (set-frame-size-according-to-resolution)
+;;(set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>]))
+(let ((alpha '(90 67)))
+  (set-frame-parameter (selected-frame) 'alpha alpha)
+  (add-to-list 'default-frame-alist (cons 'alpha alpha)))
 (split-window-horizontally)
 ;(add-hook 'after-init-hook
 ;	  (lambda () (when (>= (frame-width) 168) (split-window-horizontally))))
