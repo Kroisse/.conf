@@ -125,6 +125,7 @@
 (add-to-list 'auto-mode-alist '("\\.css\\'" . css-mode))
 (add-to-list 'auto-mode-alist '("\\.less\\'" . css-mode))
 (add-to-list 'auto-mode-alist '("templates/.*\\.html\\'" . jinja-mode))
+(add-to-list 'auto-mode-alist '("\\.rstx\\'" . rst-mode))
 
 
 (set-frame-size-according-to-resolution)
