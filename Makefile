@@ -6,6 +6,6 @@ install-git:
 
 install-emacs:
 	rm -rf ~/.emacs ~/.emacs.d/site-lisp
-	ln -s `pwd`/emacs/emacs ~/.emacs
+	ln -s `pwd`/emacs/emacs.el ~/.emacs
 	mkdir -p ~/.emacs.d
 	ln -s `pwd`/emacs/site-lisp ~/.emacs.d/site-lisp
