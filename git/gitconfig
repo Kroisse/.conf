@@ -18,7 +18,7 @@
 [core]
 	autocrlf = false
 	excludesfile = ~/.gitignore
-	editor = /usr/local/bin/emacsclient
+	editor = emacsclient -a vim
 [merge]
 	tool = opendiff
 [push]
