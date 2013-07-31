@@ -53,7 +53,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
- '(css-indent-offset 2)
+ '(css-indent-offset 4)
  '(desktop-path (quote ("~")))
  '(desktop-save-mode t)
  '(fill-column 80)
@@ -76,6 +76,7 @@
  '(ns-right-command-modifier (quote super))
  '(nxhtml-default-encoding (quote utf-8))
  '(nxhtml-skip-welcome t)
+ '(nxml-child-indent 4)
  '(overflow-newline-into-fringe t)
  '(python-check-command "flake8")
  '(rst-level-face-base-color "#888")
