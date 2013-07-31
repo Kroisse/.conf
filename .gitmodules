@@ -1,3 +1,6 @@
 [submodule "emacs/site-lisp/nxhtml"]
 	path = emacs/site-lisp/nxhtml
 	url = git@github.com:Kroisse/nxhtml.git
+[submodule "fish/autoenv"]
+	path = fish/autoenv
+	url = git@gist.github.com:5654123.git
