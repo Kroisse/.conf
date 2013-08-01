@@ -4,3 +4,6 @@
 [submodule "fish/autoenv"]
 	path = fish/autoenv
 	url = git@gist.github.com:5654123.git
+[submodule "fish/oh-my-fish"]
+	path = fish/oh-my-fish
+	url = git@github.com:Kroisse/oh-my-fish.git
