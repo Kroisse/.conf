@@ -18,7 +18,7 @@ set fish_theme agnoster-powerline
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-fish/plugins/*)
 # Custom plugins may be added to ~/.oh-my-fish/custom/plugins/
 # Example format: set fish_plugins autojump bundler
-set fish_plugins brew
+set fish_plugins brew autoenv
 
 # Path to your custom folder (default path is $FISH/custom)
 set fish_custom $SCRIPT_PATH/custom
@@ -27,9 +27,7 @@ set fish_custom $SCRIPT_PATH/custom
 . $fish_path/oh-my-fish.fish
 
 
-if [ -f "$SCRIPT_PATH/autoenv/autoenv.fish" ]
-    . "$SCRIPT_PATH/autoenv/autoenv.fish"
-end
+### load local configurations
 
 if [ -f $fish_local_config ]
     . $fish_local_config
