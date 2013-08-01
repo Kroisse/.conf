@@ -13,7 +13,7 @@ set -g EDITOR 'emacsclient --alternate-editor=vim'
 set fish_path $SCRIPT_PATH/oh-my-fish
 
 # Theme
-set fish_theme agnoster
+set fish_theme agnoster-powerline
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-fish/plugins/*)
 # Custom plugins may be added to ~/.oh-my-fish/custom/plugins/
