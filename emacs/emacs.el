@@ -74,9 +74,6 @@
  '(mumamo-set-major-mode-delay 0.1)
  '(ns-command-modifier (quote meta))
  '(ns-right-command-modifier (quote super))
- '(nxhtml-default-encoding (quote utf-8))
- '(nxhtml-skip-welcome t)
- '(nxml-child-indent 4)
  '(overflow-newline-into-fringe t)
  '(python-check-command "flake8")
  '(rst-level-face-base-color "#888")
@@ -117,7 +114,6 @@
 (show-paren-mode t)
 
 (when (>= emacs-major-version 23)
-  (load (concat (file-name-as-directory site-lisp-dir) "nxhtml/autostart"))
   (require 'jinja))
 
 (add-hook 'css-mode-hook 'css-color-mode)

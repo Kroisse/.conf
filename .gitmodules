@@ -1,6 +1,3 @@
-[submodule "emacs/site-lisp/nxhtml"]
-	path = emacs/site-lisp/nxhtml
-	url = git@github.com:Kroisse/nxhtml.git
 [submodule "fish/oh-my-fish"]
 	path = fish/oh-my-fish
 	url = git@github.com:Kroisse/oh-my-fish.git
