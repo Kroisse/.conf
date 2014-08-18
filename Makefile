@@ -10,3 +10,4 @@ install-emacs:
 	ln -s `pwd`/emacs/emacs.el ~/.emacs
 	mkdir -p ~/.emacs.d
 	ln -s `pwd`/emacs/site-lisp ~/.emacs.d/site-lisp
+	cp `pwd`/emacs/emacs-local-sample.el ~/.emacs_local
