@@ -95,6 +95,8 @@
  '(x-select-enable-clipboard t)
  '(zencoding-indentation 2))
 
+(setq system-uses-terminfo nil)
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -113,6 +115,11 @@
 
 (add-hook 'term-mode-hook
           (lambda () (define-key term-raw-map (kbd "C-y") 'term-paste)))
+
+(add-hook 'term-mode-hook
+          (lambda ()
+            (add-to-list 'term-bind-key-alist '("M-[" . multi-term-prev))
+            (add-to-list 'term-bind-key-alist '("M-]" . multi-term-next))))
 
 (eval-after-load "vc-hooks"
          '(define-key vc-prefix-map "=" 'ediff-revision))
