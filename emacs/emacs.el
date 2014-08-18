@@ -88,7 +88,6 @@
  '(x-select-enable-clipboard t)
  '(zencoding-indentation 2))
 
-(color-theme-solarized-light)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -113,9 +112,6 @@
 
 (show-paren-mode t)
 
-(when (>= emacs-major-version 23)
-  (require 'jinja))
-
 (add-hook 'css-mode-hook 'css-color-mode)
 (autoload 'css-mode "css-mode" "" t)
 (autoload 'css-color-mode "mon-css-color""" t)
@@ -123,7 +119,6 @@
 (add-to-list 'auto-mode-alist '("\\.less\\'" . css-mode))
 (add-to-list 'auto-mode-alist '("templates/.*\\.html\\'" . jinja-mode))
 (add-to-list 'auto-mode-alist '("\\.rstx\\'" . rst-mode))
-
 
 (set-frame-size-according-to-resolution)
 ;;(set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>]))
@@ -135,30 +130,3 @@
 ;	  (lambda () (when (>= (frame-width) 168) (split-window-horizontally))))
 
 
-;; flymake using python-check-command
-(when (load "flymake" t)
- (defun flymake-pyflakes-init ()
-   (let* ((temp-file (flymake-init-create-temp-buffer-copy 
-                      'flymake-create-temp-inplace))
-          (local-file (file-relative-name 
-                       temp-file 
-                       (file-name-directory buffer-file-name)))
-          (py-check-cmd (split-string-and-unquote python-check-command))
-          (py-check-exe (car py-check-cmd))
-          (py-check-arg (cdr py-check-cmd)))
-     (list py-check-exe (append py-check-arg
-                                (list local-file)))))
- (add-to-list 'flymake-allowed-file-name-masks 
-              '("\\.py\\'" flymake-pyflakes-init))
- (add-hook 'python-mode-hook 'flymake-find-file-hook)
-
- (defun flymake-rust-init ()
-   (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                      'flymake-create-temp-inplace))
-          (local-file (file-relative-name
-                       temp-file
-                       (file-name-directory buffer-file-name))))
-     (list "/usr/local/bin/rustc" (list "--no-trans" local-file))))
- (add-to-list 'flymake-allowed-file-name-masks
-              '(".+\\.r[cs]$" flymake-rust-init
-                flymake-simple-cleanup flymake-get-real-file-name)))
