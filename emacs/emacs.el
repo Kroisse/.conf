@@ -18,11 +18,6 @@
 (add-to-list 'load-path site-lisp-dir)
 (walk-subdirs site-lisp-dir (lambda (path) (add-to-list 'load-path path)))
 
-(setenv "PATH"
-        (concat "/usr/local/bin" ":"
-                (getenv "PATH")))
-(setq exec-path (append exec-path '("/usr/local/bin")))
-
 (defun frame-size-according-to-size (width height)
   (let ((width (cond ((>= width 1280) 165)
                            ((>= width 1024) 120)
@@ -129,4 +124,7 @@
 ;(add-hook 'after-init-hook
 ;	  (lambda () (when (>= (frame-width) 168) (split-window-horizontally))))
 
+(let ((local-conf (concat (getenv "HOME") "/.emacs-local")))
+  (when (file-readable-p local-conf)
+    (load-file local-conf)))
 
