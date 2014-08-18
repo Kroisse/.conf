@@ -147,3 +147,5 @@
   (when (file-readable-p local-conf)
     (load-file local-conf)))
 
+(provide 'emacs)
+;;; emacs.el ends here
