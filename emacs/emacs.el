@@ -143,7 +143,7 @@
 ;(add-hook 'after-init-hook
 ;	  (lambda () (when (>= (frame-width) 168) (split-window-horizontally))))
 
-(let ((local-conf (concat (getenv "HOME") "/.emacs-local")))
+(let ((local-conf (concat (getenv "HOME") "/.emacs_local")))
   (when (file-readable-p local-conf)
     (load-file local-conf)))
 

@@ -3,7 +3,7 @@ autoload run-help
 HELPDIR=/usr/local/share/zsh/helpfiles
 
 if [ -z "$LOCAL_ZSHRC" ]; then
-    LOCAL_ZSHRC=$HOME/.zshrc-local
+    LOCAL_ZSHRC=$HOME/.zshrc_local
 fi
 
 # Path to your oh-my-zsh configuration.
