@@ -17,9 +17,15 @@
 	ui = auto
 [core]
 	autocrlf = false
-	excludesfile = ~/.gitignore
+	excludesfile = ~/.gitignore_global
 	editor = emacsclient -a vim
 [merge]
 	tool = opendiff
 [push]
 	default = simple
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
