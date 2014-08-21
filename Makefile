@@ -1,9 +1,9 @@
 install: install-git install-emacs
 
 install-git:
-	rm -f ~/.gitconfig
+	rm -f ~/.gitconfig ~/.gitignore_global
 	ln -s `pwd`/git/gitconfig ~/.gitconfig
-	touch ~/.gitignore_global
+	ln -s `pwd`/git/gitignore ~/.gitignore_global
 
 install-emacs:
 	rm -rf ~/.emacs ~/.emacs.d/site-lisp
