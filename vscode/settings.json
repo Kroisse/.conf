@@ -1,0 +1,24 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "editor.glyphMargin": true,
+    "editor.rulers": [79, 119],
+    "editor.renderWhitespace": true,
+    "editor.wrappingColumn": 120,
+
+    "files.autoSave": "onFocusChange",
+    "files.exclude": {
+        "**/*.pyc": true,
+        "**/*~": true,
+        ".tox/": true,
+        "built/**": true,
+        "static/built/**": true
+    },
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+
+    "rust.checkOnSave": true
+
+}
