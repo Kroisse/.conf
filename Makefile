@@ -1,4 +1,4 @@
-install: install-git install-emacs
+install: install-git install-emacs install-zsh
 
 install-git:
 	rm -f ~/.gitconfig ~/.gitignore_global
@@ -11,3 +11,7 @@ install-emacs:
 	mkdir -p ~/.emacs.d
 	ln -s `pwd`/emacs/site-lisp ~/.emacs.d/site-lisp
 	cp `pwd`/emacs/emacs-local-sample.el ~/.emacs_local
+
+install-zsh:
+	rm -f ~/.zshrc
+	ln -s `pwd`/zsh/zshrc ~/.zshrc
