@@ -5,9 +5,10 @@ EMACS_D := $(HOME)/.emacs.d
 EMACS_SITE_LISP := $(EMACS_D)/site-lisp
 GITCONFIG := $(HOME)/.gitconfig
 GITIGNORE := $(HOME)/.gitignore_global
+VSCODE_SETTINGS := $(HOME)/Library/Application\ Support/Code/User/settings.json
 ZSHRC := $(HOME)/.zshrc
 
-install: install-emacs install-git install-zsh
+install: install-emacs install-git install-vscode install-zsh
 
 install-emacs:
 	-rm -ri $(EMACS_SETTINGS) $(EMACS_SITE_LISP)
@@ -24,6 +25,11 @@ install-git:
 install-zsh: $(HOME)/.oh-my-zsh
 	-rm -i $(ZSHRC)
 	ln -s $(TOP)zsh/zshrc $(ZSHRC)
+
+install-vscode:
+	-rm -i $(VSCODE_SETTINGS)
+	ln -s $(TOP)vscode/settings.json $(VSCODE_SETTINGS)
+
 
 $(HOME)/.oh-my-zsh:
 	sh $(TOP)zsh/install-oh-my-zsh.sh
