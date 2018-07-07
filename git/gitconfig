@@ -15,17 +15,28 @@
 	br = branch -r
 	spop = stash pop
 	shead = show stash@{0}
+	graph = log --graph --abbrev-commit --pretty=oneline
+	sh = show
 [color]
 	ui = auto
 [core]
 	autocrlf = false
 	excludesfile = ~/.gitignore_global
-	editor = emacsclient -t -a vim
+	editor = code -w
 [merge]
 	tool = opendiff
 [push]
 	default = simple
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
 [log]
 	date = iso8601
+[merge "npm-merge-driver"]
+	name = automatically merge npm lockfiles
+	driver = npx npm-merge-driver merge %A %O %B %P
+[rebase]
+	autoStash = true
 [include]
 	path = ~/.gitconfig_local

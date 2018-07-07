@@ -58,14 +58,24 @@ fi
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git osx brew pip mosh virtualenv)
-
-# Customize to your needs...
-if [[ -e $LOCAL_ZSHRC ]]; then
-    source $LOCAL_ZSHRC
-fi
+plugins=(
+    git
+    osx
+    pip
+    mosh
+    virtualenv
+    docker
+    kubectl
+    cargo
+    aws
+)
 
 source $ZSH/oh-my-zsh.sh
+
+# export ZPLUG_HOME=/usr/local/opt/zplug
+# source $ZPLUG_HOME/init.zsh
+
+# zplug load --verbose
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -91,3 +101,10 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# Customize to your needs...
+if [[ -e $LOCAL_ZSHRC ]]; then
+    source $LOCAL_ZSHRC
+fi

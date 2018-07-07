@@ -1,9 +1,12 @@
 // Place your settings in this file to overwrite the default settings
 {
+    "editor.fontFamily": "Fira Code",
+    "editor.fontLigatures": true,
     "editor.glyphMargin": true,
+    "editor.minimap.enabled": true,
     "editor.rulers": [79, 119],
-    "editor.renderWhitespace": true,
-    "editor.wrappingColumn": 120,
+    "editor.renderWhitespace": "boundary",
+    "editor.wordWrapColumn": 120,
 
     "files.autoSave": "onFocusChange",
     "files.exclude": {
@@ -16,9 +19,39 @@
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
 
+    "python.venvFolders": [ "~/.virtualenvs" ],
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
 
-    "rust.checkOnSave": true,
-    "terminal.integrated.shell.windows": "C:\\Windows\\Sysnative\\WindowsPowerShell\\v1.0\\powershell.exe"
+    "terminal.integrated.shell.windows": "C:\\Windows\\Sysnative\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "typescript.implementationsCodeLens.enabled": true,
+    "tslint.enable": true,
+
+    "window.zoomLevel": 0,
+    "workbench.colorTheme": "Solarized Dark",
+    "workbench.iconTheme": "vs-seti",
+
+    "gitlens.advanced.messages": {
+        "suppressCommitHasNoPreviousCommitWarning": false,
+        "suppressCommitNotFoundWarning": false,
+        "suppressFileNotUnderSourceControlWarning": false,
+        "suppressGitVersionWarning": false,
+        "suppressLineUncommittedWarning": false,
+        "suppressNoRepositoryWarning": false,
+        "suppressResultsExplorerNotice": true,
+        "suppressShowKeyBindingsNotice": true,
+        "suppressUpdateNotice": false,
+        "suppressWelcomeNotice": true
+    },
+    "gitlens.keymap": "chorded",
+    "gitlens.historyExplorer.enabled": true,
+    "files.associations": {
+        "zshrc": "shellscript",
+        ".zshrc_local": "shellscript",
+        ".gitconfig_local": "properties"
+    },
+    "[diff]": {
+        "files.insertFinalNewline": false,
+        "files.trimTrailingWhitespace": false,
+    }
 }
