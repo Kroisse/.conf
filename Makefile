@@ -7,12 +7,7 @@ GITCONFIG := $(HOME)/.gitconfig
 GITIGNORE := $(HOME)/.gitignore_global
 ZSHRC := $(HOME)/.zshrc
 
-install: install-git install-emacs install-zsh
-
-install-git:
-	-rm -i $(GITCONFIG) $(GITIGNORE)
-	ln -s $(TOP)git/gitconfig $(GITCONFIG)
-	ln -s $(TOP)git/gitignore $(GITIGNORE)
+install: install-emacs install-git install-zsh
 
 install-emacs:
 	-rm -ri $(EMACS_SETTINGS) $(EMACS_SITE_LISP)
@@ -20,6 +15,11 @@ install-emacs:
 	mkdir -p $(EMACS_D)
 	ln -s $(TOP)emacs/site-lisp $(EMACS_SITE_LISP)
 	cp $(TOP)emacs/emacs-local-sample.el $(EMACS_SETTINGS)_local
+
+install-git:
+	-rm -i $(GITCONFIG) $(GITIGNORE)
+	ln -s $(TOP)git/gitconfig $(GITCONFIG)
+	ln -s $(TOP)git/gitignore $(GITIGNORE)
 
 install-zsh: $(HOME)/.oh-my-zsh
 	-rm -i $(ZSHRC)
