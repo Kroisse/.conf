@@ -28,9 +28,10 @@
 [push]
 	default = simple
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
 	required = true
+	process = git-lfs filter-process
 [log]
 	date = iso8601
 [merge "npm-merge-driver"]
@@ -40,3 +41,5 @@
 	autoStash = true
 [include]
 	path = ~/.gitconfig_local
+[credential]
+	helper = store
