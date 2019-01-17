@@ -1,13 +1,23 @@
 // Place your settings in this file to overwrite the default settings
 {
+    "breadcrumbs.enabled": true,
+    "diffEditor.ignoreTrimWhitespace": false,
     "editor.fontFamily": "Fira Code",
     "editor.fontLigatures": true,
     "editor.glyphMargin": true,
     "editor.minimap.enabled": true,
-    "editor.rulers": [79, 119],
-    "editor.renderWhitespace": "boundary",
+    "editor.rulers": [
+        79,
+        119
+    ],
+    "editor.renderWhitespace": "none",
     "editor.wordWrapColumn": 120,
-
+    "extensions.ignoreRecommendations": true,
+    "files.associations": {
+        "zshrc": "shellscript",
+        ".zshrc_local": "shellscript",
+        ".gitconfig_local": "properties"
+    },
     "files.autoSave": "onFocusChange",
     "files.exclude": {
         "**/*.pyc": true,
@@ -18,19 +28,16 @@
     },
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
-
-    "python.venvFolders": [ "~/.virtualenvs" ],
-    "python.linting.pylintEnabled": false,
-    "python.linting.flake8Enabled": true,
-
     "terminal.integrated.shell.windows": "C:\\Windows\\Sysnative\\WindowsPowerShell\\v1.0\\powershell.exe",
-    "typescript.implementationsCodeLens.enabled": true,
-    "tslint.enable": true,
-
+    "window.nativeTabs": true,
+    "window.titleBarStyle": "native",
     "window.zoomLevel": 0,
-    "workbench.colorTheme": "Solarized Dark",
+    "workbench.activityBar.visible": true,
     "workbench.iconTheme": "vs-seti",
+    "workbench.sideBar.location": "right",
 
+    // Git
+    "git.autofetch": true,
     "gitlens.advanced.messages": {
         "suppressCommitHasNoPreviousCommitWarning": false,
         "suppressCommitNotFoundWarning": false,
@@ -44,14 +51,33 @@
         "suppressWelcomeNotice": true
     },
     "gitlens.keymap": "chorded",
-    "gitlens.historyExplorer.enabled": true,
-    "files.associations": {
-        "zshrc": "shellscript",
-        ".zshrc_local": "shellscript",
-        ".gitconfig_local": "properties"
-    },
+    "gitlens.views.fileHistory.enabled": true,
+    "gitlens.views.lineHistory.enabled": true,
+
+    // Languages
+    "javascript.preferences.importModuleSpecifier": "relative",
+    "javascript.preferences.quoteStyle": "single",
+    "python.linting.flake8Enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.unitTest.debugPort": 2999,
+    "python.venvFolders": [
+        "~/.virtualenvs"
+    ],
+    "rust.rustfmt_path": "rustfmt",
+    "rust-client.revealOutputChannelOn": "error",
+    "rust-client.rlsPath": "rls",
+    "tslint.autoFixOnSave": true,
+    "tslint.enable": true,
+    "typescript.implementationsCodeLens.enabled": true,
+    "typescript.preferences.importModuleSpecifier": "relative",
+    "typescript.preferences.quoteStyle": "single",
+
+    // Mode-specific settings
     "[diff]": {
         "files.insertFinalNewline": false,
         "files.trimTrailingWhitespace": false,
+    },
+    "[yaml]": {
+        "editor.tabSize": 2
     }
 }
