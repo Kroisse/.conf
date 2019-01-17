@@ -23,6 +23,7 @@ install-git:
 	ln -s $(TOP)git/gitignore $(GITIGNORE)
 
 install-zsh: $(HOME)/.oh-my-zsh
+	brew install zsh-completions
 	-rm -i $(ZSHRC)
 	ln -s $(TOP)zsh/zshrc $(ZSHRC)
 
