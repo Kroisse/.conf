@@ -19,7 +19,7 @@
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
 
-    "python.venvFolders": [ "~/.virtualenvs" ],
+    "python.venvPath": "~/.virtualenvs",
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
 
@@ -27,9 +27,12 @@
     "typescript.implementationsCodeLens.enabled": true,
     "tslint.enable": true,
 
+    "window.nativeTabs": true,
+    "window.titleBarStyle": "native",
     "window.zoomLevel": 0,
-    "workbench.colorTheme": "Solarized Dark",
     "workbench.iconTheme": "vs-seti",
+
+    "rust-client.rustupPath": "rustup",
 
     "gitlens.advanced.messages": {
         "suppressCommitHasNoPreviousCommitWarning": false,
@@ -53,5 +56,7 @@
     "[diff]": {
         "files.insertFinalNewline": false,
         "files.trimTrailingWhitespace": false,
-    }
+    },
+    "workbench.sideBar.location": "right",
+    "editor.fontWeight": "bold"
 }
