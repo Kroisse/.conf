@@ -60,12 +60,11 @@
     "python.linting.flake8Enabled": true,
     "python.linting.pylintEnabled": false,
     "python.unitTest.debugPort": 2999,
-    "python.venvFolders": [
-        "~/.virtualenvs"
-    ],
+    "python.venvPath": "~/.virtualenvs",
     "rust.rustfmt_path": "rustfmt",
     "rust-client.revealOutputChannelOn": "error",
     "rust-client.rlsPath": "rls",
+    "rust-client.rustupPath": "rustup",
     "tslint.autoFixOnSave": true,
     "tslint.enable": true,
     "typescript.implementationsCodeLens.enabled": true,
