@@ -2,4 +2,7 @@
 .DS_Store
 \#*#
 .#*
+*.bak
 .vscode/
+.node-version
+yarn-error.log
