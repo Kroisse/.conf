@@ -3,10 +3,11 @@ TOP := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 ALACRITTY_D := $(HOME)/.config/alacritty
 GITCONFIG := $(HOME)/.gitconfig
 GITIGNORE := $(HOME)/.gitignore_global
+TMUX_CONF := $(HOME)/.tmux.conf
 VSCODE_SETTINGS := $(HOME)/Library/Application\ Support/Code/User/settings.json
 ZSHRC := $(HOME)/.zshrc
 
-install: install-alacritty install-git install-vscode install-zsh
+install: install-alacritty install-git install-tmux install-vscode install-zsh
 
 install-alacritty:
 	-rm -ri $(ALACRITTY_D)
@@ -17,6 +18,10 @@ install-git:
 	-rm -i $(GITCONFIG) $(GITIGNORE)
 	ln -s $(TOP)git/gitconfig $(GITCONFIG)
 	ln -s $(TOP)git/gitignore $(GITIGNORE)
+
+install-tmux:
+	-rm -i $(TMUX_CONF)
+	ln -s $(TOP)tmux/tmux.conf $(TMUX_CONF)
 
 install-zsh: $(HOME)/.oh-my-zsh
 	brew install zsh-completions
