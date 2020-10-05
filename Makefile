@@ -1,9 +1,6 @@
 TOP := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 
 ALACRITTY_D := $(HOME)/.config/alacritty
-EMACS_SETTINGS := $(HOME)/.emacs
-EMACS_D := $(HOME)/.emacs.d
-EMACS_SITE_LISP := $(EMACS_D)/site-lisp
 GITCONFIG := $(HOME)/.gitconfig
 GITIGNORE := $(HOME)/.gitignore_global
 VSCODE_SETTINGS := $(HOME)/Library/Application\ Support/Code/User/settings.json
@@ -15,13 +12,6 @@ install-alacritty:
 	-rm -ri $(ALACRITTY_D)
 	mkdir -p $(dir $(ALACRITTY_D))
 	ln -s $(TOP)alacritty $(ALACRITTY_D)
-
-install-emacs:
-	-rm -ri $(EMACS_SETTINGS) $(EMACS_SITE_LISP)
-	ln -s $(TOP)emacs/emacs.el $(EMACS_SETTINGS)
-	mkdir -p $(EMACS_D)
-	ln -s $(TOP)emacs/site-lisp $(EMACS_SITE_LISP)
-	cp $(TOP)emacs/emacs-local-sample.el $(EMACS_SETTINGS)_local
 
 install-git:
 	-rm -i $(GITCONFIG) $(GITIGNORE)
@@ -46,4 +36,3 @@ $(HOME)/.oh-my-zsh:
 
 inspect:
 	@echo "TOP=$(TOP)"
-	@echo "EMACS_SITE_LISP=$(EMACS_SITE_LISP)"
