@@ -9,7 +9,7 @@ GITIGNORE := $(HOME)/.gitignore_global
 VSCODE_SETTINGS := $(HOME)/Library/Application\ Support/Code/User/settings.json
 ZSHRC := $(HOME)/.zshrc
 
-install: install-alacritty install-emacs install-git install-vscode install-zsh
+install: install-alacritty install-git install-vscode install-zsh
 
 install-alacritty:
 	-rm -ri $(ALACRITTY_D)
