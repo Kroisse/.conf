@@ -23,15 +23,14 @@ install-tmux:
 	-rm -i $(TMUX_CONF)
 	ln -s $(TOP)tmux/tmux.conf $(TMUX_CONF)
 
-install-zsh: $(HOME)/.oh-my-zsh
-	brew install zsh-completions
-	-rm -i $(ZSHRC)
-	ln -s $(TOP)zsh/zshrc $(ZSHRC)
-
 install-vscode:
 	-rm -i $(VSCODE_SETTINGS)
 	ln -s $(TOP)vscode/settings.json $(VSCODE_SETTINGS)
 
+install-zsh: $(HOME)/.oh-my-zsh
+	brew install zsh-completions
+	-rm -i $(ZSHRC)
+	ln -s $(TOP)zsh/zshrc $(ZSHRC)
 
 $(HOME)/.oh-my-zsh:
 	sh $(TOP)zsh/install-oh-my-zsh.sh
