@@ -1,5 +1,6 @@
 TOP := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 
+ALACRITTY_D := $(HOME)/.config/alacritty
 EMACS_SETTINGS := $(HOME)/.emacs
 EMACS_D := $(HOME)/.emacs.d
 EMACS_SITE_LISP := $(EMACS_D)/site-lisp
@@ -8,7 +9,12 @@ GITIGNORE := $(HOME)/.gitignore_global
 VSCODE_SETTINGS := $(HOME)/Library/Application\ Support/Code/User/settings.json
 ZSHRC := $(HOME)/.zshrc
 
-install: install-emacs install-git install-vscode install-zsh
+install: install-alacritty install-emacs install-git install-vscode install-zsh
+
+install-alacritty:
+	-rm -ri $(ALACRITTY_D)
+	mkdir -p $(dir $(ALACRITTY_D))
+	ln -s $(TOP)alacritty $(ALACRITTY_D)
 
 install-emacs:
 	-rm -ri $(EMACS_SETTINGS) $(EMACS_SITE_LISP)

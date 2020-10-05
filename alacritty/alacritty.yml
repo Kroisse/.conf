@@ -1,0 +1,11 @@
+font:
+  normal:
+    family: Fira Code
+shell:
+  program: /usr/local/bin/tmux
+  args:
+  - new-session
+  - -A
+  - -s
+  - main
+background_opacity: 0.8
