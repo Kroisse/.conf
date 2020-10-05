@@ -6,6 +6,7 @@
 	co = checkout
 	s = status
 	sta = status
+	sw = switch
 	d = diff
 	di = diff
 	ds = diff --staged
@@ -43,3 +44,5 @@
 	path = ~/.gitconfig_local
 [credential]
 	helper = store
+[init]
+	defaultBranch = main
