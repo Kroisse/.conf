@@ -35,7 +35,6 @@
     "workbench.activityBar.visible": true,
     "workbench.iconTheme": "vs-seti",
     "workbench.sideBar.location": "right",
-
     // Git
     "git.autofetch": true,
     "gitlens.advanced.messages": {
@@ -53,7 +52,6 @@
     "gitlens.keymap": "chorded",
     "gitlens.views.fileHistory.enabled": true,
     "gitlens.views.lineHistory.enabled": true,
-
     // Languages
     "javascript.preferences.importModuleSpecifier": "relative",
     "javascript.preferences.quoteStyle": "single",
@@ -70,7 +68,6 @@
     "typescript.implementationsCodeLens.enabled": true,
     "typescript.preferences.importModuleSpecifier": "relative",
     "typescript.preferences.quoteStyle": "single",
-
     // Mode-specific settings
     "[diff]": {
         "files.insertFinalNewline": false,
@@ -78,5 +75,16 @@
     },
     "[yaml]": {
         "editor.tabSize": 2
-    }
+    },
+    "crates.listPreReleases": true,
+    "editor.formatOnSave": true,
+    "markdown-preview-enhanced.liveUpdate": false,
+    "eslint.lintTask.enable": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "workbench.colorTheme": "Default Light+",
+    "evenBetterToml.formatter.alignEntries": false,
+    "javascript.validate.enable": false,
+    "typescript.validate.enable": false,
 }
