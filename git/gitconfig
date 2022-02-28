@@ -18,6 +18,7 @@
 	shead = show stash@{0}
 	graph = log --graph --abbrev-commit --pretty=oneline
 	sh = show
+	rs = restore
 [color]
 	ui = auto
 [core]
