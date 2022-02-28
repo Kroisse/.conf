@@ -10,7 +10,7 @@
         79,
         119
     ],
-    "editor.renderWhitespace": "none",
+    "editor.renderWhitespace": "all",
     "editor.wordWrapColumn": 120,
     "extensions.ignoreRecommendations": true,
     "files.associations": {
@@ -31,8 +31,6 @@
     "terminal.integrated.shell.windows": "C:\\Windows\\Sysnative\\WindowsPowerShell\\v1.0\\powershell.exe",
     "window.nativeTabs": true,
     "window.titleBarStyle": "native",
-    "window.zoomLevel": 0,
-    "workbench.activityBar.visible": true,
     "workbench.iconTheme": "vs-seti",
     "workbench.sideBar.location": "right",
     // Git
@@ -57,7 +55,7 @@
     "javascript.preferences.quoteStyle": "single",
     "python.linting.flake8Enabled": true,
     "python.linting.pylintEnabled": false,
-    "python.unitTest.debugPort": 2999,
+    "python.testing.debugPort": 2999,
     "python.venvPath": "~/.virtualenvs",
     "rust.rustfmt_path": "rustfmt",
     "rust-client.revealOutputChannelOn": "error",
@@ -86,5 +84,13 @@
     "workbench.colorTheme": "Default Light+",
     "evenBetterToml.formatter.alignEntries": false,
     "javascript.validate.enable": false,
-    "typescript.validate.enable": false,
+    "rust-analyzer.inlayHints.enable": true,
+    "editor.inlineSuggest.enabled": true,
+    "javascript.format.enable": false,
+    "json.format.enable": false,
+    "typescript.format.enable": false,
+    "eslint.format.enable": true,
+    "workbench.editor.wrapTabs": true,
+    "diffEditor.renderSideBySide": false,
+    "workbench.editor.untitled.hint": "hidden"
 }
