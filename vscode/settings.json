@@ -77,9 +77,9 @@
     "markdown-preview-enhanced.liveUpdate": false,
     "eslint.lintTask.enable": true,
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
+        "source.fixAll.eslint": "explicit"
     },
-    "workbench.colorTheme": "Default Light+",
+    "workbench.colorTheme": "Default Light Modern",
     "evenBetterToml.formatter.alignEntries": false,
     "javascript.validate.enable": false,
     "rust-analyzer.inlayHints.enable": true,
@@ -90,5 +90,17 @@
     "eslint.format.enable": true,
     "workbench.editor.wrapTabs": true,
     "diffEditor.renderSideBySide": false,
-    "workbench.editor.untitled.hint": "hidden"
+    "github.copilot.enable": {
+        "*": false,
+        "yaml": false,
+        "plaintext": false,
+        "markdown": false,
+        "rust": true
+    },
+    "rust-analyzer.inlayHints.bindingModeHints.enable": true,
+    "rust-analyzer.inlayHints.expressionAdjustmentHints.enable": "reborrow",
+    "rust-analyzer.inlayHints.lifetimeElisionHints.enable": "skip_trivial",
+    "rust-analyzer.inlayHints.reborrowHints.enable": "mutable",
+    "editor.inlayHints.enabled": "offUnlessPressed",
+    "workbench.editor.empty.hint": "hidden"
 }
