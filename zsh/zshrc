@@ -10,6 +10,8 @@ fi
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 test -e "$HOME/.cargo/bin" && export PATH="$HOME/.cargo/bin:$PATH"
 which nodenv &>/dev/null && eval "$(nodenv init - zsh)"
