@@ -91,10 +91,11 @@
     "workbench.editor.wrapTabs": true,
     "diffEditor.renderSideBySide": false,
     "github.copilot.enable": {
-        "*": false,
-        "yaml": false,
+        "*": true,
         "plaintext": false,
         "markdown": false,
+        "scminput": false,
+        "yaml": false,
         "rust": true
     },
     "rust-analyzer.inlayHints.bindingModeHints.enable": true,
