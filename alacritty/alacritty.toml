@@ -3,7 +3,7 @@ family = "Fira Code"
 
 [shell]
 args = ["new-session", "-A", "-s", "main"]
-program = "/usr/local/bin/tmux"
+program = "/opt/homebrew/bin/tmux"
 
 [window]
 opacity = 0.8
