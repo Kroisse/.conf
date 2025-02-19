@@ -14,10 +14,15 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 test -e "$HOME/.cargo/bin" && export PATH="$HOME/.cargo/bin:$PATH"
-which nodenv &>/dev/null && eval "$(nodenv init - zsh)"
-if which pyenv &>/dev/null; then
-  eval "$(pyenv init --path zsh)"
-  alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
+
+if command -v mise &>/dev/null; then
+    eval "$(mise activate zsh)"
+else
+    command -v nodenv &>/dev/null && eval "$(nodenv init - zsh)"
+    if command -v pyenv &>/dev/null; then
+        eval "$(pyenv init --path zsh)"
+        alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
+    fi
 fi
 
 # Path to your oh-my-zsh configuration.
@@ -31,7 +36,7 @@ if [ -n "$INSIDE_EMACS" ]; then
    ZSH_THEME="steeef"
 else
    # ZSH_THEME="agnoster"
-   which starship &>/dev/null && eval "$(starship init zsh)"
+   command -v starship &>/dev/null && eval "$(starship init zsh)"
 fi
 
 # Uncomment the following line to use case-sensitive completion.
@@ -78,6 +83,7 @@ plugins=(
     # git
     github
     macos
+    mise
     mosh
     npm
     pip
