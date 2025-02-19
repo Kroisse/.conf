@@ -74,7 +74,9 @@ fi
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     # aws
+    direnv
     # git
+    github
     macos
     mosh
     npm
