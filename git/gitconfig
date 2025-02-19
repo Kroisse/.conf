@@ -24,7 +24,6 @@
 [core]
 	autocrlf = false
 	excludesfile = ~/.gitignore_global
-	editor = code -w
 [merge]
 	tool = opendiff
 [push]

@@ -1,110 +1,116 @@
 // Place your settings in this file to overwrite the default settings
 {
-    "breadcrumbs.enabled": true,
-    "diffEditor.ignoreTrimWhitespace": false,
-    "editor.fontFamily": "Fira Code",
-    "editor.fontLigatures": true,
-    "editor.glyphMargin": true,
-    "editor.minimap.enabled": true,
-    "editor.rulers": [
-        79,
-        119
-    ],
-    "editor.renderWhitespace": "all",
-    "editor.wordWrapColumn": 120,
-    "extensions.ignoreRecommendations": true,
-    "files.associations": {
-        "zshrc": "shellscript",
-        ".zshrc_local": "shellscript",
-        ".gitconfig_local": "properties"
-    },
-    "files.autoSave": "onFocusChange",
-    "files.exclude": {
-        "**/*.pyc": true,
-        "**/*~": true,
-        ".tox/": true,
-        "built/**": true,
-        "static/built/**": true
-    },
-    "files.insertFinalNewline": true,
-    "files.trimTrailingWhitespace": true,
-    "terminal.integrated.shell.windows": "C:\\Windows\\Sysnative\\WindowsPowerShell\\v1.0\\powershell.exe",
-    "workbench.iconTheme": "vs-seti",
-    "workbench.sideBar.location": "right",
-    // Git
-    "git.autofetch": true,
-    "gitlens.advanced.messages": {
-        "suppressCommitHasNoPreviousCommitWarning": false,
-        "suppressCommitNotFoundWarning": false,
-        "suppressFileNotUnderSourceControlWarning": false,
-        "suppressGitVersionWarning": false,
-        "suppressLineUncommittedWarning": false,
-        "suppressNoRepositoryWarning": false,
-        "suppressResultsExplorerNotice": true,
-        "suppressShowKeyBindingsNotice": true,
-        "suppressUpdateNotice": false,
-        "suppressWelcomeNotice": true
-    },
-    "gitlens.keymap": "chorded",
-    "gitlens.views.fileHistory.enabled": true,
-    "gitlens.views.lineHistory.enabled": true,
-    // Languages
-    "javascript.preferences.importModuleSpecifier": "relative",
-    "javascript.preferences.quoteStyle": "single",
-    "python.linting.flake8Enabled": true,
-    "python.linting.pylintEnabled": false,
-    "python.testing.debugPort": 2999,
-    "python.venvPath": "~/.virtualenvs",
-    "rust.rustfmt_path": "rustfmt",
-    "rust-client.revealOutputChannelOn": "error",
-    "rust-client.rlsPath": "rls",
-    "rust-client.rustupPath": "rustup",
-    "tslint.autoFixOnSave": true,
-    "tslint.enable": true,
-    "typescript.implementationsCodeLens.enabled": true,
-    "typescript.preferences.importModuleSpecifier": "relative",
-    "typescript.preferences.quoteStyle": "single",
-    // Mode-specific settings
-    "[diff]": {
-        "files.insertFinalNewline": false,
-        "files.trimTrailingWhitespace": false,
-    },
-    "[yaml]": {
-        "editor.tabSize": 2
-    },
-    "crates.listPreReleases": true,
-    "editor.formatOnSave": true,
-    "markdown-preview-enhanced.liveUpdate": false,
-    "eslint.lintTask.enable": true,
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": "explicit"
-    },
-    "workbench.colorTheme": "Default Light Modern",
-    "evenBetterToml.formatter.alignEntries": false,
-    "javascript.validate.enable": false,
-    "rust-analyzer.inlayHints.enable": true,
-    "editor.inlineSuggest.enabled": true,
-    "javascript.format.enable": false,
-    "json.format.enable": false,
-    "typescript.format.enable": false,
-    "eslint.format.enable": true,
-    "workbench.editor.wrapTabs": true,
-    "diffEditor.renderSideBySide": false,
-    "github.copilot.enable": {
-        "*": true,
-        "plaintext": false,
-        "markdown": false,
-        "scminput": false,
-        "yaml": false,
-        "rust": true
-    },
-    "rust-analyzer.inlayHints.bindingModeHints.enable": true,
-    "rust-analyzer.inlayHints.expressionAdjustmentHints.enable": "reborrow",
-    "rust-analyzer.inlayHints.lifetimeElisionHints.enable": "skip_trivial",
-    "rust-analyzer.inlayHints.reborrowHints.enable": "mutable",
-    "editor.inlayHints.enabled": "offUnlessPressed",
-    "workbench.editor.empty.hint": "hidden",
-    "[typescriptreact]": {
-        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-    }
+  "breadcrumbs.enabled": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.fontFamily": "Fira Code",
+  "editor.fontLigatures": true,
+  "editor.glyphMargin": true,
+  "editor.minimap.enabled": true,
+  "editor.rulers": [79, 119],
+  "editor.renderWhitespace": "all",
+  "editor.wordWrapColumn": 120,
+  "extensions.ignoreRecommendations": true,
+  "files.associations": {
+    "zshrc": "shellscript",
+    ".zshrc_local": "shellscript",
+    ".gitconfig_local": "properties"
+  },
+  "files.exclude": {
+    "**/*.pyc": true,
+    "**/*~": true,
+    ".tox/": true,
+    "built/**": true,
+    "static/built/**": true
+  },
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "terminal.integrated.shell.windows": "C:\\Windows\\Sysnative\\WindowsPowerShell\\v1.0\\powershell.exe",
+  "workbench.iconTheme": "vs-seti",
+  // Git
+  "git.autofetch": true,
+  "gitlens.advanced.messages": {
+    "suppressCommitHasNoPreviousCommitWarning": false,
+    "suppressCommitNotFoundWarning": false,
+    "suppressFileNotUnderSourceControlWarning": false,
+    "suppressGitVersionWarning": false,
+    "suppressLineUncommittedWarning": false,
+    "suppressNoRepositoryWarning": false,
+    "suppressResultsExplorerNotice": true,
+    "suppressShowKeyBindingsNotice": true,
+    "suppressUpdateNotice": false,
+    "suppressWelcomeNotice": true
+  },
+  "gitlens.keymap": "chorded",
+  // Languages
+  "javascript.preferences.importModuleSpecifier": "relative",
+  "javascript.preferences.quoteStyle": "single",
+  "python.linting.flake8Enabled": true,
+  "python.linting.pylintEnabled": false,
+  "python.testing.debugPort": 2999,
+  "python.venvPath": "~/.virtualenvs",
+  "typescript.implementationsCodeLens.enabled": true,
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.preferences.quoteStyle": "single",
+  // Mode-specific settings
+  "[diff]": {
+    "files.insertFinalNewline": false,
+    "files.trimTrailingWhitespace": false
+  },
+  "[yaml]": {
+    "editor.tabSize": 2
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "editor.formatOnSave": true,
+  "markdown-preview-enhanced.liveUpdate": false,
+  "eslint.lintTask.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "workbench.colorTheme": "Gruvbox Light Hard",
+  "evenBetterToml.formatter.alignEntries": false,
+  "javascript.validate.enable": false,
+  "editor.inlineSuggest.enabled": true,
+  "javascript.format.enable": false,
+  "typescript.format.enable": false,
+  "eslint.format.enable": true,
+  "workbench.editor.wrapTabs": true,
+  "diffEditor.renderSideBySide": false,
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": true,
+    "markdown": true,
+    "scminput": false,
+    "yaml": false,
+    "rust": true
+  },
+  "rust-analyzer.inlayHints.bindingModeHints.enable": true,
+  "rust-analyzer.inlayHints.lifetimeElisionHints.enable": "skip_trivial",
+  "editor.inlayHints.enabled": "offUnlessPressed",
+  "workbench.editor.empty.hint": "hidden",
+  "workbench.startupEditor": "none",
+  "files.autoSave": "afterDelay",
+  "typescript.updateImportsOnFileMove.enabled": "never",
+  "terminal.integrated.env.osx": {
+    "EDITOR": "code -w"
+  },
+  "github.copilot.editor.enableAutoCompletions": true,
+  "remote.tunnels.access.preventSleep": true,
+  "javascript.updateImportsOnFileMove.enabled": "never",
+  "remote.tunnels.access.hostNameOverride": "wrtn",
+  "rust-analyzer.diagnostics.styleLints.enable": true,
+  "rust-analyzer.testExplorer": true,
+  "rust-analyzer.check.command": "clippy",
+  "rust-analyzer.inlayHints.closureReturnTypeHints.enable": "with_block",
+  "git.openRepositoryInParentFolders": "never",
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  }
 }
