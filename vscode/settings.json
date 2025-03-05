@@ -34,11 +34,7 @@
     "suppressFileNotUnderSourceControlWarning": false,
     "suppressGitVersionWarning": false,
     "suppressLineUncommittedWarning": false,
-    "suppressNoRepositoryWarning": false,
-    "suppressResultsExplorerNotice": true,
-    "suppressShowKeyBindingsNotice": true,
-    "suppressUpdateNotice": false,
-    "suppressWelcomeNotice": true
+    "suppressNoRepositoryWarning": false
   },
   "gitlens.keymap": "chorded",
   // Languages
@@ -106,9 +102,6 @@
   "git.openRepositoryInParentFolders": "never",
   "[rust]": {
     "editor.defaultFormatter": "rust-lang.rust-analyzer"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
