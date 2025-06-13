@@ -105,7 +105,6 @@ fi
 # Base plugins for all platforms
 plugins=(
     # aws
-    direnv
     # git
     github
     mise
@@ -114,6 +113,11 @@ plugins=(
     pip
     rust
 )
+
+# Add direnv plugin only if direnv is installed
+if command -v direnv &>/dev/null; then
+    plugins+=(direnv)
+fi
 
 # Add OS-specific plugins
 if [[ "$OSTYPE" == "darwin"* ]]; then

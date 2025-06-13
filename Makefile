@@ -28,7 +28,11 @@ install-vscode:
 	ln -s $(TOP)vscode/settings.json $(VSCODE_SETTINGS)
 
 install-zsh: $(HOME)/.oh-my-zsh
-	brew install zsh-completions
+	@if command -v brew >/dev/null 2>&1; then \
+		brew install zsh-completions; \
+	else \
+		echo "Homebrew not found, skipping zsh-completions install."; \
+	fi
 	-rm -i $(ZSHRC)
 	ln -s $(TOP)zsh/zshrc $(ZSHRC)
 
