@@ -1,0 +1,125 @@
+;;; -*- lexical-binding: t -*-
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+
+(use-package emacs
+  :ensure nil
+  :init
+  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+  :custom
+  (current-language-environment "Korean")
+  (default-input-method "korean-hangul390")
+  (menu-bar-mode nil)
+  :config
+  (prefer-coding-system 'utf-8)
+  (when (file-exists-p custom-file)
+    (load custom-file 'noerror))
+  :bind (("C-\\" . toggle-input-method)))
+
+;; Ivy/Counsel for better file finding and completion
+(use-package counsel
+  :ensure t
+  :bind (("C-s" . swiper-isearch)      ; Better search
+	 ("C-r" . swiper-isearch-backward) ; Better backward search
+         ("M-x" . counsel-M-x)         ; Better M-x
+         ("C-x C-f" . counsel-find-file) ; Better find file
+         ("C-c g" . counsel-git)       ; Find file in git project
+         ("C-c j" . counsel-git-grep)  ; Grep in git project
+         ("C-c k" . counsel-rg))       ; ag/ripgrep search
+  :custom
+  (ivy-use-virtual-buffers t)          ; Add recent files to switch-buffer
+  (ivy-count-format "(%d/%d) ")        ; Show current/total in minibuffer)
+  (ivy-height 10)                      ; Number of result lines to display
+  :config
+  (ivy-mode 1))                        ; Enable Ivy everywhere
+
+(use-package copilot
+  :vc (:url "https://github.com/copilot-emacs/copilot.el"
+            :rev :newest
+            :branch "main")
+  :ensure t
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+	      ("<tab>" . 'copilot-accept-completion)
+	      ("TAB" . 'copilot-accept-completion)
+	      ("C-TAB" . 'copilot-accept-completion-by-word)))
+
+(use-package treesit
+  :ensure nil)
+
+(use-package vterm
+  :ensure t
+  :custom
+  (vterm-environment
+   '("LANG=ko_KR.UTF-8"
+     "LC_ALL=ko_KR.UTF-8"
+     "LC_CTYPE=ko_KR.UTF-8"))
+  :config
+  (setq vterm-toggle-use-dedicated-buffer t)
+  ;; Quick launcher for Claude Code
+  (defun claude-code (&optional yolo)
+    "Open Claude Code in vterm. With prefix arg, skip permissions."
+    (interactive "P")
+    (let ((default-directory (or (vc-root-dir) default-directory)))
+      (vterm (if yolo "*claude-code-yolo*" "*claude-code*"))
+      (vterm-send-string
+       (if yolo
+	   "claude --dangerously-skip-permissions\n"
+	 "claude\n"))))
+  (defun my/send-korean-to-vterm (text)
+    "한글 텍스트를 vterm에 전송"
+    (interactive "s한글 입력: ")
+    (vterm-send-string text))
+  :bind (("C-c c" . claude-code)))
+
+(use-package project
+  :ensure nil
+  :config
+  (add-to-list 'project-vc-extra-root-markers ".clangd"))
+
+(use-package eglot
+  :ensure t
+  :bind (:map eglot-mode-map
+	      ("C-c l r" . eglot-rename)
+	      ("C-c l a" . eglot-code-actions)
+	      ("C-c l f" . eglot-format)
+	      ("C-c l d" . eglot-find-declaration)
+	      ("C-c l t" . eglot-find-typeDefinition)
+	      ("C-c l h" . eglot-help-at-point))
+  :hook ((c-mode c++-mode) . my/eglot-ensure-with-project-root)
+  :custom
+  (eglot-autoshutdown t)
+  (eglot-extend-to-xref t)
+  :config
+  (add-to-list 'eglot-server-programs
+	       '((c-mode c++-mode)
+		 . ("clangd"
+		    "--background-index"
+		    "--clang-tidy"
+		    "--enable-config"
+		    "--header-insertion=never")))
+  (defun my/eglot-ensure-with-project-root ()
+    "Ensure Eglot is started with the project root."
+    (when-let ((project (project-current)))
+      (let ((default-directory (project-root project)))
+	(eglot-ensure)))))
+
+(use-package flymake
+  :ensure nil
+  :bind (:map flymake-mode-map
+	      ("C-c ! l" . flymake-show-buffer-diagnostics) ; Show diagnostics
+	      ("C-c ! n" . flymake-goto-next-error) ; Go to next error
+	      ("C-c ! p" . flymake-goto-prev-error)) ; Go to previous error
+  :custom
+  (flymake-no-changes-timeout 0.5)    ; Shorter delay for changes
+  :hook ((prog-mode . flymake-mode)))
+  
+(use-package magit
+  :ensure t
+  :bind (("C-x g" . magit-status)
+	 ("C-x M-g" . magit-dispatch)
+	 ("C-c M-g" . magit-file-dispatch))
+  :custom
+  (magit-diff-refine-hunk t))
