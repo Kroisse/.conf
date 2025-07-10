@@ -4,7 +4,16 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(copilot eglot gruvbox-theme magit vterm))
+ '(auto-save-no-message t)
+ '(auto-save-visited-mode t)
+ '(custom-enabled-themes '(leuven))
+ '(ivy-initial-inputs-alist
+   '((counsel-package . "^+") (counsel-org-capture . "^")
+     (counsel-minor . "^+") (counsel-M-x . "")
+     (counsel-describe-symbol . "^") (org-refile . "^")
+     (org-agenda-refile . "^") (org-capture-refile . "^")
+     (Man-completion-table . "^") (woman . "^")))
+ '(package-selected-packages nil)
  '(package-vc-selected-packages
    '((copilot :url "https://github.com/copilot-emacs/copilot.el" :branch
 	      "main")))

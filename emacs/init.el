@@ -1,6 +1,6 @@
-;;; -*- lexical-binding: t -*-
+';;; -*- lexical-binding: t -*-
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(package-initialize)
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (unless package-archive-contents
   (package-refresh-contents))
 
@@ -12,6 +12,8 @@
   (current-language-environment "Korean")
   (default-input-method "korean-hangul390")
   (menu-bar-mode nil)
+  (vc-follow-symlinks t)
+  (global-auto-revert-mode t)
   :config
   (prefer-coding-system 'utf-8)
   (when (file-exists-p custom-file)
@@ -38,6 +40,7 @@
   (ivy-use-virtual-buffers t)          ; Add recent files to switch-buffer
   (ivy-count-format "(%d/%d) ")        ; Show current/total in minibuffer)
   (ivy-height 10)                      ; Number of result lines to display
+  (ivy-re-builders-alist '((t . ivy--regex-plus))) ; Space-separated words matching
   :config
   (ivy-mode 1))                        ; Enable Ivy everywhere
 
@@ -48,12 +51,19 @@
   :ensure t
   :hook (prog-mode . copilot-mode)
   :bind (:map copilot-completion-map
-	      ("<tab>" . 'copilot-accept-completion)
-	      ("TAB" . 'copilot-accept-completion)
-	      ("C-TAB" . 'copilot-accept-completion-by-word)))
+	      ("<tab>" . copilot-accept-completion)
+	      ("TAB" . copilot-accept-completion)
+	      ("C-TAB" . copilot-accept-completion-by-word)))
 
 (use-package treesit
-  :ensure nil)
+  :ensure nil
+  :config
+  (dolist (mode '(("Dockerfile\\'" . dockerfile-ts-mode)
+                  ("\\.dockerfile\\'" . dockerfile-ts-mode)
+                  ("\\.ya?ml\\'" . yaml-ts-mode)
+                  ("\\.json\\'" . json-ts-mode)
+                  ("\\.toml\\'" . toml-ts-mode)))
+    (add-to-list 'auto-mode-alist mode)))
 
 (use-package vterm
   :ensure t
@@ -129,3 +139,9 @@
 	 ("C-c M-g" . magit-file-dispatch))
   :custom
   (magit-diff-refine-hunk t))
+
+(use-package git-gutter
+  :ensure t
+  :hook (prog-mode . git-gutter-mode)
+  :config
+  (global-git-gutter-mode 1))
