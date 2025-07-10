@@ -7,13 +7,21 @@
  '(auto-save-no-message t)
  '(auto-save-visited-mode t)
  '(custom-enabled-themes '(leuven))
+ '(dired-listing-switches "-alh --group-directories-first" nil nil "Customized with use-package emacs")
+ '(dirvish-attributes
+   '(file-time file-size subtree-state collapse git-msg vc-state))
+ '(dirvish-mode-line-format '(:left (sort symlink) :right (omit index)))
+ '(dirvish-override-dired-mode t)
+ '(dirvish-side-follow-mode t)
  '(ivy-initial-inputs-alist
    '((counsel-package . "^+") (counsel-org-capture . "^")
      (counsel-minor . "^+") (counsel-M-x . "")
      (counsel-describe-symbol . "^") (org-refile . "^")
      (org-agenda-refile . "^") (org-capture-refile . "^")
      (Man-completion-table . "^") (woman . "^")))
- '(package-selected-packages nil)
+ '(package-selected-packages
+   '(copilot counsel dirvish eglot git-gutter gruvbox-theme magit
+	     treesit-auto vterm))
  '(package-vc-selected-packages
    '((copilot :url "https://github.com/copilot-emacs/copilot.el" :branch
 	      "main")))

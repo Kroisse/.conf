@@ -1,6 +1,8 @@
 ';;; -*- lexical-binding: t -*-
+(require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
 
@@ -44,6 +46,15 @@
   :config
   (ivy-mode 1))                        ; Enable Ivy everywhere
 
+(use-package dirvish
+  :ensure t
+  :init
+  (dirvish-override-dired-mode)
+  :bind
+  ;; Bind `dired' to `dirvish'
+  (("C-x C-j" . dirvish)
+   ("C-x d" . dirvish)))
+
 (use-package copilot
   :vc (:url "https://github.com/copilot-emacs/copilot.el"
             :rev :newest
@@ -58,12 +69,33 @@
 (use-package treesit
   :ensure nil
   :config
-  (dolist (mode '(("Dockerfile\\'" . dockerfile-ts-mode)
+  ;; Define tree-sitter language sources
+  (setq treesit-language-source-alist
+        '((cmake . ("https://github.com/uyha/tree-sitter-cmake"))
+          (dockerfile . ("https://github.com/camdencheek/tree-sitter-dockerfile"))
+          (json . ("https://github.com/tree-sitter/tree-sitter-json"))
+          (markdown . ("https://github.com/tree-sitter-grammars/tree-sitter-markdown" "main" "src"))
+          (toml . ("https://github.com/tree-sitter/tree-sitter-toml"))
+          (yaml . ("https://github.com/tree-sitter-grammars/tree-sitter-yaml"))))
+
+  ;; Auto-mode mappings
+  (dolist (mode '(("/CMakeLists\\.txt\\'" . cmake-ts-mode)
+                  ("\\.cmake\\'" . cmake-ts-mode)
+                  ("Dockerfile\\'" . dockerfile-ts-mode)
                   ("\\.dockerfile\\'" . dockerfile-ts-mode)
-                  ("\\.ya?ml\\'" . yaml-ts-mode)
                   ("\\.json\\'" . json-ts-mode)
-                  ("\\.toml\\'" . toml-ts-mode)))
+                  ("\\.md\\'" . markdown-ts-mode)
+                  ("\\.markdown\\'" . markdown-ts-mode)
+                  ("\\.toml\\'" . toml-ts-mode)
+                  ("\\.ya?ml\\'" . yaml-ts-mode)))
     (add-to-list 'auto-mode-alist mode)))
+
+(use-package treesit-auto
+  :ensure t
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (global-treesit-auto-mode))
 
 (use-package vterm
   :ensure t
