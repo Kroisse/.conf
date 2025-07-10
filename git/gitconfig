@@ -28,6 +28,7 @@
 	tool = opendiff
 [push]
 	default = simple
+	autoSetupRemote = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -42,6 +43,8 @@
 	autoStash = true
 [include]
 	path = ~/.gitconfig_local
+[includeIf "gitdir:~/enerzai/"]
+	path = ~/.gitconfig_enerzai
 [credential]
 	helper = store
 [init]
