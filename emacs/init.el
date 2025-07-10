@@ -18,6 +18,12 @@
     (load custom-file 'noerror))
   :bind (("C-\\" . toggle-input-method)))
 
+(use-package gruvbox-theme
+  :ensure t
+  :config
+  (load-theme 'gruvbox-light-hard t)
+  (set-face-attribute 'default nil :background "unspecified-bg"))
+
 ;; Ivy/Counsel for better file finding and completion
 (use-package counsel
   :ensure t
