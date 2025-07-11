@@ -60,6 +60,8 @@
   :ensure t
   :init
   (dirvish-override-dired-mode)
+  :hook
+  (dirvish-mode . (lambda () (setq-local global-hl-line-mode nil)))
   :bind
   ;; Bind `dired' to `dirvish'
   (("C-x C-j" . dirvish-side)
@@ -113,16 +115,19 @@
   (vterm-environment
    '("LANG=ko_KR.UTF-8"
      "LC_ALL=ko_KR.UTF-8"
-     "LC_CTYPE=ko_KR.UTF-8"))
+     "LC_CTYPE=ko_KR.UTF-8"
+     "TERM=xterm-256color"))
   (vterm-disable-underline t)
   (vterm-disable-inverse-video t)
   (vterm-max-scrollback 10000)
   :config
   (setq vterm-toggle-use-dedicated-buffer t)
+  (setq vterm-always-compile-module t)
   (add-hook 'vterm-mode-hook
             (lambda ()
               (setq-local global-hl-line-mode nil)
-              (setq-local line-spacing 0))))
+              (setq-local line-spacing 0)
+)))
   ;; Quick launcher for Claude Code
   ;; (defun claude-code (&optional yolo)
   ;;   "Open Claude Code in vterm. With prefix arg, skip permissions."
