@@ -16,7 +16,7 @@
       scroll-bar-mode nil)
 
 ;; Prevent flash of unstyled modeline
-(setq-default mode-line-format nil)
+; (setq-default mode-line-format nil)
 
 ;; Don't resize the frame
 (setq frame-inhibit-implied-resize t)
