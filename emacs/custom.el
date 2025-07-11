@@ -6,7 +6,7 @@
  ;; If there is more than one, they won't work right.
  '(auto-save-no-message t)
  '(auto-save-visited-mode t)
- '(custom-enabled-themes '(leuven))
+ '(claude-code-program-switches '("--dangerously-skip-permissions"))
  '(dired-listing-switches "-alh --group-directories-first" nil nil "Customized with use-package emacs")
  '(dirvish-attributes
    '(file-time file-size subtree-state collapse git-msg vc-state))
@@ -20,11 +20,15 @@
      (org-agenda-refile . "^") (org-capture-refile . "^")
      (Man-completion-table . "^") (woman . "^")))
  '(package-selected-packages
-   '(copilot counsel dirvish eglot git-gutter gruvbox-theme magit
-	     treesit-auto vterm))
+   '(claude-code copilot counsel dirvish eglot git-gutter gruvbox-theme
+		 magit treesit-auto vterm))
  '(package-vc-selected-packages
-   '((copilot :url "https://github.com/copilot-emacs/copilot.el" :branch
-	      "main")))
+   '((claude-code :url "https://github.com/stevemolitor/claude-code.el"
+		  :branch "main")
+     (copilot :url "https://github.com/copilot-emacs/copilot.el"
+	      :branch "main")))
+ '(vterm-clear-scrollback-when-clearing t)
+ '(vterm-min-window-width 40)
  '(warning-suppress-log-types
    '((copilot copilot-no-mode-indent) (copilot copilot-exceeds-max-char))))
 (custom-set-faces

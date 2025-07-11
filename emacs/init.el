@@ -26,7 +26,8 @@
   (setq locale-coding-system 'utf-8)
   (when (file-exists-p custom-file)
     (load custom-file 'noerror))
-  :bind (("C-\\" . toggle-input-method)))
+  :bind (("C-\\" . toggle-input-method)
+         ("C-x O" . (lambda () (interactive) (other-window -1)))))
 
 (use-package gruvbox-theme
   :ensure t
