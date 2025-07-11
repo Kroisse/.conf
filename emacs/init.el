@@ -16,8 +16,14 @@
   (menu-bar-mode nil)
   (vc-follow-symlinks t)
   (global-auto-revert-mode t)
+  (inhibit-compacting-font-caches t)
   :config
   (prefer-coding-system 'utf-8)
+  (set-language-environment "UTF-8")
+  (set-default-coding-systems 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+  (setq locale-coding-system 'utf-8)
   (when (file-exists-p custom-file)
     (load custom-file 'noerror))
   :bind (("C-\\" . toggle-input-method)))
@@ -26,7 +32,11 @@
   :ensure t
   :config
   (load-theme 'gruvbox-light-hard t)
-  (set-face-attribute 'default nil :background "unspecified-bg"))
+  (set-face-attribute 'default nil :background "unspecified-bg")
+  (when (display-graphic-p)
+    (set-fontset-font t 'unicode "Noto Color Emoji" nil 'prepend)
+    (set-fontset-font t 'hangul (font-spec :family "D2Coding"))
+    (set-fontset-font t 'symbol (font-spec :family "Symbola") nil 'prepend)))
 
 ;; Ivy/Counsel for better file finding and completion
 (use-package counsel
@@ -52,7 +62,7 @@
   (dirvish-override-dired-mode)
   :bind
   ;; Bind `dired' to `dirvish'
-  (("C-x C-j" . dirvish)
+  (("C-x C-j" . dirvish-side)
    ("C-x d" . dirvish)))
 
 (use-package copilot
@@ -104,23 +114,40 @@
    '("LANG=ko_KR.UTF-8"
      "LC_ALL=ko_KR.UTF-8"
      "LC_CTYPE=ko_KR.UTF-8"))
+  (vterm-disable-underline t)
+  (vterm-disable-inverse-video t)
+  (vterm-max-scrollback 10000)
   :config
   (setq vterm-toggle-use-dedicated-buffer t)
+  (add-hook 'vterm-mode-hook
+            (lambda ()
+              (setq-local global-hl-line-mode nil)
+              (setq-local line-spacing 0))))
   ;; Quick launcher for Claude Code
-  (defun claude-code (&optional yolo)
-    "Open Claude Code in vterm. With prefix arg, skip permissions."
-    (interactive "P")
-    (let ((default-directory (or (vc-root-dir) default-directory)))
-      (vterm (if yolo "*claude-code-yolo*" "*claude-code*"))
-      (vterm-send-string
-       (if yolo
-	   "claude --dangerously-skip-permissions\n"
-	 "claude\n"))))
-  (defun my/send-korean-to-vterm (text)
-    "한글 텍스트를 vterm에 전송"
-    (interactive "s한글 입력: ")
-    (vterm-send-string text))
-  :bind (("C-c c" . claude-code)))
+  ;; (defun claude-code (&optional yolo)
+  ;;   "Open Claude Code in vterm. With prefix arg, skip permissions."
+  ;;   (interactive "P")
+  ;;   (let ((default-directory (or (vc-root-dir) default-directory)))
+  ;;     (vterm (if yolo "*claude-code-yolo*" "*claude-code*"))
+  ;;     (vterm-send-string
+  ;;      (if yolo
+  ;; 	   "claude --dangerously-skip-permissions\n"
+  ;; 	 "claude\n"))))
+  ;; (defun my/send-korean-to-vterm (text)
+  ;;   "한글 텍스트를 vterm에 전송"
+  ;;   (interactive "s한글 입력: ")
+  ;;   (vterm-send-string text))
+  ;; :bind (("C-c c" . claude-code)))
+
+(use-package claude-code :ensure t
+  :vc (:url "https://github.com/stevemolitor/claude-code.el"
+	    :rev :newest
+	    :branch "main")
+  :config
+  (setq claude-code-terminal-backend 'vterm)
+  (setq claude-code-vterm-buffer-multiline-output t)
+  (claude-code-mode)
+  :bind-keymap ("C-c c" . claude-code-command-map))
 
 (use-package project
   :ensure nil
