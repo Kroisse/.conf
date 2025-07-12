@@ -27,7 +27,8 @@
   (when (file-exists-p custom-file)
     (load custom-file 'noerror))
   :bind (("C-\\" . toggle-input-method)
-         ("C-x O" . (lambda () (interactive) (other-window -1)))))
+         ("C-x O" . (lambda () (interactive) (other-window -1)))
+         ("C-x k" . kill-current-buffer)))
 
 (use-package gruvbox-theme
   :ensure t
