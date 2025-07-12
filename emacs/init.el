@@ -106,7 +106,9 @@
                   ("\\.dockerfile\\'" . dockerfile-ts-mode)
                   ("\\.json\\'" . json-ts-mode)
                   ("\\.toml\\'" . toml-ts-mode)
-                  ("\\.ya?ml\\'" . yaml-ts-mode)))
+                  ("\\.ya?ml\\'" . yaml-ts-mode)
+                  ("\\.hpp\\'" . c++-mode)
+                  ("\\.h\\'" . c++-mode)))
     (add-to-list 'auto-mode-alist mode)))
 
 (use-package treesit-auto
