@@ -210,3 +210,15 @@
   :hook (prog-mode . git-gutter-mode)
   :config
   (global-git-gutter-mode 1))
+
+(use-package breadcrumb
+  :ensure t
+  :config
+  (breadcrumb-mode 1))
+
+(use-package imenu-list
+  :ensure t
+  :bind ("C-c i" . imenu-list-smart-toggle)
+  :custom
+  (imenu-list-focus-after-activation t)
+  (imenu-list-auto-resize t))

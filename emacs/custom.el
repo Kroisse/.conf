@@ -7,12 +7,16 @@
  '(auto-save-no-message t)
  '(auto-save-visited-mode t)
  '(claude-code-program-switches '("--dangerously-skip-permissions"))
+ '(compilation-scroll-output 'first-error)
+ '(default-input-method "korean-hangul390" nil nil "Customized with use-package emacs")
  '(dired-listing-switches "-alh --group-directories-first" nil nil "Customized with use-package emacs")
  '(dirvish-attributes
    '(file-time file-size subtree-state collapse git-msg vc-state))
  '(dirvish-mode-line-format '(:left (sort symlink) :right (omit index)))
  '(dirvish-override-dired-mode t)
+ '(dirvish-side-attributes '(vc-state))
  '(dirvish-side-follow-mode t)
+ '(dirvish-subtree-state-style 'plus)
  '(ivy-initial-inputs-alist
    '((counsel-package . "^+") (counsel-org-capture . "^")
      (counsel-minor . "^+") (counsel-M-x . "")
@@ -20,13 +24,15 @@
      (org-agenda-refile . "^") (org-capture-refile . "^")
      (Man-completion-table . "^") (woman . "^")))
  '(package-selected-packages
-   '(claude-code copilot counsel dirvish eglot git-gutter gruvbox-theme
-		 magit treesit-auto vterm))
+   '(breadcrumb claude-code copilot counsel dirvish eglot git-gutter
+		gruvbox-theme imenu-list magit markdown-mode
+		treesit-auto vterm))
  '(package-vc-selected-packages
    '((claude-code :url "https://github.com/stevemolitor/claude-code.el"
 		  :branch "main")
      (copilot :url "https://github.com/copilot-emacs/copilot.el"
 	      :branch "main")))
+ '(recenter-redisplay nil)
  '(vterm-clear-scrollback-when-clearing t)
  '(vterm-min-window-width 40)
  '(warning-suppress-log-types
