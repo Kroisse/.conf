@@ -80,6 +80,14 @@
 	      ("TAB" . copilot-accept-completion)
 	      ("C-TAB" . copilot-accept-completion-by-word)))
 
+
+(use-package markdown-mode
+  :ensure t
+  :mode (("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :custom
+  (markdown-command "pandoc"))
+
 (use-package treesit
   :ensure nil
   :config
@@ -88,7 +96,6 @@
         '((cmake . ("https://github.com/uyha/tree-sitter-cmake"))
           (dockerfile . ("https://github.com/camdencheek/tree-sitter-dockerfile"))
           (json . ("https://github.com/tree-sitter/tree-sitter-json"))
-          (markdown . ("https://github.com/tree-sitter-grammars/tree-sitter-markdown" "main" "src"))
           (toml . ("https://github.com/tree-sitter/tree-sitter-toml"))
           (yaml . ("https://github.com/tree-sitter-grammars/tree-sitter-yaml"))))
 
@@ -98,8 +105,6 @@
                   ("Dockerfile\\'" . dockerfile-ts-mode)
                   ("\\.dockerfile\\'" . dockerfile-ts-mode)
                   ("\\.json\\'" . json-ts-mode)
-                  ("\\.md\\'" . markdown-ts-mode)
-                  ("\\.markdown\\'" . markdown-ts-mode)
                   ("\\.toml\\'" . toml-ts-mode)
                   ("\\.ya?ml\\'" . yaml-ts-mode)))
     (add-to-list 'auto-mode-alist mode)))
