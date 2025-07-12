@@ -7,3 +7,4 @@ program = "/opt/homebrew/bin/tmux"
 
 [window]
 opacity = 0.8
+option_as_alt = "OnlyLeft"
