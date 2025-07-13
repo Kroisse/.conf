@@ -166,7 +166,16 @@
 (use-package project
   :ensure nil
   :config
-  (add-to-list 'project-vc-extra-root-markers ".clangd"))
+  (add-to-list 'project-vc-extra-root-markers ".clangd")
+  
+  ;; Add vterm to project switch commands
+  (defun project-vterm ()
+    "Start vterm in the current project's root."
+    (interactive)
+    (let* ((default-directory (project-root (project-current t)))
+           (project-name (project-name (project-current t)))
+           (vterm-buffer-name (format "*vterm-%s*" project-name)))
+      (vterm))))
 
 (use-package eglot
   :ensure t

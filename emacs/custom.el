@@ -32,6 +32,12 @@
 		  :branch "main")
      (copilot :url "https://github.com/copilot-emacs/copilot.el"
 	      :branch "main")))
+ '(project-switch-commands
+   '((project-find-file "Find file" nil)
+     (project-find-regexp "Find regexp" nil)
+     (project-find-dir "Find directory" nil)
+     (project-vterm "Vterm" 116) (project-eshell "Eshell" nil)
+     (claude-code "Claude Code" 99) (project-any-command "Other" nil)))
  '(recenter-redisplay nil)
  '(vterm-clear-scrollback-when-clearing t)
  '(vterm-min-window-width 40)
