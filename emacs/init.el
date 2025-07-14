@@ -25,6 +25,7 @@
   (vc-follow-symlinks t)
   (global-auto-revert-mode t)
   (inhibit-compacting-font-caches t)
+  (xterm-mouse-mode t)
   :config
   (prefer-coding-system 'utf-8)
   (set-language-environment "UTF-8")
@@ -34,15 +35,23 @@
   (setq locale-coding-system 'utf-8)
   (when (file-exists-p custom-file)
     (load custom-file 'noerror))
+  :config
+  (defun toggle-window-dedicated ()
+    "Toggle window dedication for the current window."
+    (interactive)
+    (let ((dedicated (window-dedicated-p)))
+      (set-window-dedicated-p (selected-window) (not dedicated))
+      (message "Window %s" (if dedicated "undedicated" "dedicated"))))
   :bind (("C-\\" . toggle-input-method)
          ("C-x O" . (lambda () (interactive) (other-window -1)))
-         ("C-x k" . kill-current-buffer)))
+         ("C-x k" . kill-current-buffer)
+         ("C-c w d" . toggle-window-dedicated)))
 
-(use-package doom-themes
-  :ensure t
+(use-package emacs
+  :ensure nil
   :config
-  (load-theme 'doom-one-light t)
-  (set-face-attribute 'default nil :background "unspecified-bg")
+  (load-theme 'tango t)
+  (set-face-attribute 'default nil :background "unspecified-bg" :foreground "black")
   (when (display-graphic-p)
     (set-fontset-font t 'unicode "Noto Color Emoji" nil 'prepend)
     (set-fontset-font t 'hangul (font-spec :family "D2Coding"))
@@ -51,8 +60,8 @@
 ;; Ivy/Counsel for better file finding and completion
 (use-package counsel
   :ensure t
-  :bind (("C-s" . swiper-isearch)      ; Better search
-	 ("C-r" . swiper-isearch-backward) ; Better backward search
+  :bind (("C-s" . swiper)      ; Better search
+	 ("C-r" . swiper-backward) ; Better backward search
          ("M-x" . counsel-M-x)         ; Better M-x
          ("C-x C-f" . counsel-find-file) ; Better find file
          ("C-c g" . counsel-git)       ; Find file in git project
@@ -62,9 +71,15 @@
   (ivy-use-virtual-buffers t)          ; Add recent files to switch-buffer
   (ivy-count-format "(%d/%d) ")        ; Show current/total in minibuffer)
   (ivy-height 10)                      ; Number of result lines to display
-  (ivy-re-builders-alist '((t . ivy--regex-plus))) ; Space-separated words matching
+  (ivy-re-builders-alist '((swiper . ivy--regex-plus)
+                           (t . ivy--regex-plus))) ; Space-separated words matching
+  (swiper-use-visual-line nil)
+  (swiper-include-line-number-in-search t)
+  (swiper-action-recenter t)
+  (ivy-dynamic-exhibit-delay-ms 150)   ; Reduce input delay
   :config
-  (ivy-mode 1))                        ; Enable Ivy everywhere
+  (ivy-mode 1)
+  (setq swiper-goto-start-of-match t))
 
 (use-package dirvish
   :ensure t
@@ -184,6 +199,13 @@
            (project-name (project-name (project-current t)))
            (vterm-buffer-name (format "*vterm-%s*" project-name)))
       (vterm))))
+
+(use-package compile
+  :ensure nil
+  :hook (compilation-mode . (lambda ()
+                              (setq-local scroll-conservatively 10000)))
+  :config
+  (put 'project-compile-command 'safe-local-variable 'stringp))
 
 (use-package eglot
   :ensure t
