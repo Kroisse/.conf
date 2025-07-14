@@ -1,6 +1,12 @@
-';;; -*- lexical-binding: t -*-
+;;; init.el --- Personal Emacs configuration -*- lexical-binding: t -*-
+
+;;; Commentary:
+;; Personal Emacs configuration
+
+;;; Code:
+
 (require 'package)
-(setq package-archives 
+(setq package-archives
       '(("gnu" . "https://elpa.gnu.org/packages/")
         ("nongnu" . "https://elpa.nongnu.org/nongnu/")
         ("melpa" . "https://melpa.org/packages/")))
@@ -32,10 +38,10 @@
          ("C-x O" . (lambda () (interactive) (other-window -1)))
          ("C-x k" . kill-current-buffer)))
 
-(use-package gruvbox-theme
+(use-package doom-themes
   :ensure t
   :config
-  (load-theme 'gruvbox-light-hard t)
+  (load-theme 'doom-one-light t)
   (set-face-attribute 'default nil :background "unspecified-bg")
   (when (display-graphic-p)
     (set-fontset-font t 'unicode "Noto Color Emoji" nil 'prepend)
@@ -222,7 +228,24 @@
 	 ("C-x M-g" . magit-dispatch)
 	 ("C-c M-g" . magit-file-dispatch))
   :custom
-  (magit-diff-refine-hunk t))
+  (magit-diff-refine-hunk t)
+  :custom-face
+  (magit-popup-key ((t (:foreground "#0969da" :weight bold))))
+  (magit-popup-heading ((t (:foreground "#24292f" :weight bold))))
+  (magit-popup-option-value ((t (:foreground "#cf222e"))))
+  (magit-section-highlight ((t (:background "#f6f8fa"))))
+  (magit-diff-added ((t (:background "#d1f4d0" :foreground "#116329"))))
+  (magit-diff-removed ((t (:background "#ffeef0" :foreground "#82071e"))))
+  (magit-diff-added-highlight ((t (:background "#a7f3d0" :foreground "#116329"))))
+  (magit-diff-removed-highlight ((t (:background "#fecdd3" :foreground "#82071e"))))
+  (transient-key ((t (:foreground "#0969da" :weight bold))))
+  (transient-heading ((t (:foreground "#24292f" :weight bold))))
+  (transient-value ((t (:foreground "#cf222e"))))
+  (transient-argument ((t (:foreground "#8250df"))))
+  (transient-unreachable ((t (:foreground "#6e7781"))))
+  (transient-inapt-suffix ((t (:foreground "#6e7781"))))
+  (transient-inactive-argument ((t (:foreground "#6e7781"))))
+  (transient-inactive-value ((t (:foreground "#6e7781")))))
 
 (use-package git-gutter
   :ensure t
@@ -277,3 +300,5 @@
   :bind (:map corfu-map
               ("M-h" . corfu-info-documentation)
               ("M-g" . corfu-info-location)))
+
+;;; init.el ends here
