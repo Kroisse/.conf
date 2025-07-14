@@ -1,7 +1,9 @@
 ';;; -*- lexical-binding: t -*-
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(setq package-archives 
+      '(("gnu" . "https://elpa.gnu.org/packages/")
+        ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+        ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
@@ -239,3 +241,39 @@
   :custom
   (imenu-list-focus-after-activation t)
   (imenu-list-auto-resize t))
+
+(use-package corfu
+  :ensure t
+  :custom
+  (corfu-auto t)                 ; Enable auto completion
+  (corfu-auto-delay 0.1)         ; Delay before showing completion
+  (corfu-auto-prefix 1)          ; Minimum prefix length
+  (corfu-quit-no-match t)        ; Quit if no match
+  (corfu-preview-current nil)    ; Disable current candidate preview
+  :init
+  (global-corfu-mode))
+
+(use-package corfu-terminal
+  :ensure t
+  :after corfu
+  :config
+  (unless (display-graphic-p)
+    (corfu-terminal-mode +1)))
+
+;; Corfu extensions (built-in with corfu from GNU ELPA)
+(use-package corfu-popupinfo
+  :ensure nil
+  :after corfu
+  :bind (:map corfu-map
+              ("M-p" . corfu-popupinfo-scroll-down)
+              ("M-n" . corfu-popupinfo-scroll-up)
+              ("M-d" . corfu-popupinfo-toggle))
+  :config
+  (corfu-popupinfo-mode 1))
+
+(use-package corfu-info
+  :ensure nil
+  :after corfu
+  :bind (:map corfu-map
+              ("M-h" . corfu-info-documentation)
+              ("M-g" . corfu-info-location)))
