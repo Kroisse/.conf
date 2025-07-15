@@ -24,13 +24,14 @@
      (org-agenda-refile . "^") (org-capture-refile . "^")
      (Man-completion-table . "^") (woman . "^")))
  '(package-selected-packages
-   '(ace-window breadcrumb claude-code copilot corfu-doc
-		corfu-doc-terminal corfu-terminal counsel dirvish
-		doom-themes eglot git-gutter github-theme imenu-list
-		magit treesit-auto vterm))
+   '(ace-window breadcrumb claude-code-ide copilot
+		corfu-terminal counsel dirvish doom-themes eglot
+		git-gutter gruvbox-theme imenu-list magit
+		markdown-mode treesit-auto))
  '(package-vc-selected-packages
-   '((claude-code :url "https://github.com/stevemolitor/claude-code.el"
-		  :branch "main")
+   '((claude-code-ide :url
+		      "https://github.com/manzaltu/claude-code-ide.el"
+		      :branch "main")
      (copilot :url "https://github.com/copilot-emacs/copilot.el"
 	      :branch "main")))
  '(recenter-redisplay nil)
