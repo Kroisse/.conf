@@ -43,7 +43,6 @@
       (set-window-dedicated-p (selected-window) (not dedicated))
       (message "Window %s" (if dedicated "undedicated" "dedicated"))))
   :bind (("C-\\" . toggle-input-method)
-         ("C-x O" . (lambda () (interactive) (other-window -1)))
          ("C-x k" . kill-current-buffer)
          ("C-c w d" . toggle-window-dedicated)
          ("C-t" . nil)))
@@ -439,5 +438,15 @@
          ("s-2" . (lambda () (interactive) (tab-bar-select-tab 2)))
          ("s-3" . (lambda () (interactive) (tab-bar-select-tab 3)))
 	 ("s-4" . (lambda () (interactive) (tab-bar-select-tab 4)))))
+
+(use-package ace-window
+  :ensure t
+  :bind ("C-x o" . ace-window)
+  :custom
+  (aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))  ; Use home row keys
+  (aw-scope 'frame)                        ; Only current frame
+  (aw-background t)                        ; Dim other windows
+  :config
+  (ace-window-display-mode 1))
 
 ;;; init.el ends here
