@@ -45,7 +45,8 @@
   :bind (("C-\\" . toggle-input-method)
          ("C-x O" . (lambda () (interactive) (other-window -1)))
          ("C-x k" . kill-current-buffer)
-         ("C-c w d" . toggle-window-dedicated)))
+         ("C-c w d" . toggle-window-dedicated)
+         ("C-t" . nil)))
 
 (use-package emacs
   :ensure nil
@@ -322,5 +323,71 @@
   :bind (:map corfu-map
               ("M-h" . corfu-info-documentation)
               ("M-g" . corfu-info-location)))
+
+(use-package desktop
+  :ensure nil
+  :custom
+  (desktop-restore-frames t)
+  :config
+  (desktop-save-mode 1)
+  :hook
+  (server-done . desktop-save-in-desktop-dir))
+
+(use-package tab-bar
+  :ensure nil
+  :after transient
+  :custom
+  (tab-bar-show t)
+  (tab-bar-close-button-show nil)
+  (tab-bar-new-button-show nil)
+  (tab-bar-tab-hints t)
+  :config
+  (tab-bar-mode 1)
+  
+  (defun my/tab-bar-new-tab-to ()
+    "Create new tab and switch to directory."
+    (interactive)
+    (tab-bar-new-tab)
+    (call-interactively #'counsel-find-file))
+  
+  (defun my/tab-bar-close-other-tabs ()
+    "Close all tabs except current one."
+    (interactive)
+    (tab-bar-close-other-tabs))
+  
+  (defun my/tab-bar-rename-tab-with-project ()
+    "Rename tab with project name if in project."
+    (interactive)
+    (let ((project (project-current)))
+      (if project
+          (tab-bar-rename-tab (project-name project))
+        (call-interactively #'tab-bar-rename-tab))))
+
+  (transient-define-prefix my/tab-bar-menu ()
+    "Tab bar management menu"
+    [["Tab Navigation"
+      ("n" "Next tab" tab-bar-switch-to-next-tab :transient t)
+      ("p" "Previous tab" tab-bar-switch-to-prev-tab :transient t)
+      ("1" "Tab 1" (lambda () (interactive) (tab-bar-select-tab 1)) :transient t)
+      ("2" "Tab 2" (lambda () (interactive) (tab-bar-select-tab 2)) :transient t)
+      ("3" "Tab 3" (lambda () (interactive) (tab-bar-select-tab 3)) :transient t)
+      ("4" "Tab 4" (lambda () (interactive) (tab-bar-select-tab 4)) :transient t)]
+     ["Tab Management"
+      ("c" "New tab" tab-bar-new-tab)
+      ("C" "New tab to..." my/tab-bar-new-tab-to)
+      ("x" "Close tab" tab-bar-close-tab)
+      ("X" "Close other tabs" my/tab-bar-close-other-tabs)
+      ("r" "Rename tab" my/tab-bar-rename-tab-with-project)
+      ("u" "Undo close tab" tab-bar-undo-close-tab)]
+     ["Tab Actions"
+      ("d" "Duplicate tab" tab-bar-duplicate-tab)
+      ("g" "Switch to tab..." tab-bar-switch-to-tab)
+      ("t" "Toggle tab bar" tab-bar-mode)]])
+  
+  :bind (("C-x t" . my/tab-bar-menu)
+         ("s-1" . (lambda () (interactive) (tab-bar-select-tab 1)))
+         ("s-2" . (lambda () (interactive) (tab-bar-select-tab 2)))
+         ("s-3" . (lambda () (interactive) (tab-bar-select-tab 3)))
+	 ("s-4" . (lambda () (interactive) (tab-bar-select-tab 4)))))
 
 ;;; init.el ends here
