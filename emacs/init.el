@@ -155,27 +155,7 @@
   (vterm-max-scrollback 10000)
   :config
   (setq vterm-toggle-use-dedicated-buffer t)
-  (setq vterm-always-compile-module t)
-  (add-hook 'vterm-mode-hook
-            (lambda ()
-              (setq-local global-hl-line-mode nil)
-              (setq-local line-spacing 0)
-)))
-  ;; Quick launcher for Claude Code
-  ;; (defun claude-code (&optional yolo)
-  ;;   "Open Claude Code in vterm. With prefix arg, skip permissions."
-  ;;   (interactive "P")
-  ;;   (let ((default-directory (or (vc-root-dir) default-directory)))
-  ;;     (vterm (if yolo "*claude-code-yolo*" "*claude-code*"))
-  ;;     (vterm-send-string
-  ;;      (if yolo
-  ;; 	   "claude --dangerously-skip-permissions\n"
-  ;; 	 "claude\n"))))
-  ;; (defun my/send-korean-to-vterm (text)
-  ;;   "한글 텍스트를 vterm에 전송"
-  ;;   (interactive "s한글 입력: ")
-  ;;   (vterm-send-string text))
-  ;; :bind (("C-c c" . claude-code)))
+  (setq vterm-always-compile-module t))
 
 (use-package claude-code :ensure t
   :vc (:url "https://github.com/stevemolitor/claude-code.el"
@@ -208,15 +188,11 @@
   :config
   (put 'project-compile-command 'safe-local-variable 'stringp))
 
+(use-package transient :ensure nil)
+
 (use-package eglot
   :ensure t
-  :bind (:map eglot-mode-map
-	      ("C-c l r" . eglot-rename)
-	      ("C-c l a" . eglot-code-actions)
-	      ("C-c l f" . eglot-format)
-	      ("C-c l d" . eglot-find-declaration)
-	      ("C-c l t" . eglot-find-typeDefinition)
-	      ("C-c l h" . eglot-help-at-point))
+  :after transient
   :hook ((c-mode c++-mode) . my/eglot-ensure-with-project-root)
   :custom
   (eglot-autoshutdown t)
@@ -233,17 +209,63 @@
     "Ensure Eglot is started with the project root."
     (when-let ((project (project-current)))
       (let ((default-directory (project-root project)))
-	(eglot-ensure)))))
+	(eglot-ensure))))
+
+  (transient-define-prefix my/eglot-menu ()
+    "Eglot LSP management menu"
+    [["Navigation"
+      ("d" "Find declaration" eglot-find-declaration)
+      ("D" "Find definition" xref-find-definitions)
+      ("t" "Find type definition" eglot-find-typeDefinition)
+      ("i" "Find implementation" eglot-find-implementation)
+      ("r" "Find references" xref-find-references)
+      ("b" "Go back" xref-go-back)]
+     ["Code Actions"
+      ("a" "Code actions" eglot-code-actions)
+      ("R" "Rename" eglot-rename)
+      ("f" "Format buffer" eglot-format-buffer)
+      ("F" "Format region" eglot-format)
+      ("o" "Organize imports" eglot-code-action-organize-imports)]
+     ["Documentation"
+      ("h" "Help at point" eglot-help-at-point)
+      ("H" "Eldoc" eldoc)
+      ("s" "Signature help" eglot-signature-help)]
+     ["Server Management"
+      ("S" "Start/restart server" eglot-reconnect)
+      ("Q" "Shutdown server" eglot-shutdown)
+      ("=" "Show events" eglot-events-buffer)
+      ("e" "Show stderr" eglot-stderr-buffer)]])
+  
+  :bind (:map eglot-mode-map
+	      ("C-c l" . my/eglot-menu)))
 
 (use-package flymake
   :ensure nil
-  :bind (:map flymake-mode-map
-	      ("C-c ! l" . flymake-show-buffer-diagnostics) ; Show diagnostics
-	      ("C-c ! n" . flymake-goto-next-error) ; Go to next error
-	      ("C-c ! p" . flymake-goto-prev-error)) ; Go to previous error
+  :after transient
   :custom
   (flymake-no-changes-timeout 0.5)    ; Shorter delay for changes
-  :hook ((prog-mode . flymake-mode)))
+  :hook ((prog-mode . flymake-mode))
+  :config
+  (transient-define-prefix my/flymake-menu ()
+    "Flymake diagnostics management menu"
+    [["Navigation"
+      ("n" "Next error" flymake-goto-next-error :transient t)
+      ("p" "Previous error" flymake-goto-prev-error :transient t)
+      ("f" "First error" (lambda () (interactive) (goto-char (point-min)) (flymake-goto-next-error)) :transient t)
+      ("l" "Last error" (lambda () (interactive) (goto-char (point-max)) (flymake-goto-prev-error)) :transient t)]
+     ["Diagnostics"
+      ("d" "Show buffer diagnostics" flymake-show-buffer-diagnostics)
+      ("D" "Show project diagnostics" flymake-show-project-diagnostics)
+      ("s" "Show diagnostic at point" flymake-show-diagnostic)
+      ("c" "Check buffer" flymake-start)]
+     ["Management"
+      ("r" "Running backends" flymake-running-backends)
+      ("R" "Disabled backends" flymake-disabled-backends)
+      ("b" "Reporting backends" flymake-reporting-backends)
+      ("m" "Mode line" flymake-mode)]])
+  
+  :bind (:map flymake-mode-map
+	      ("C-c !" . my/flymake-menu)))
   
 (use-package magit
   :ensure t
@@ -368,10 +390,10 @@
     [["Tab Navigation"
       ("n" "Next tab" tab-bar-switch-to-next-tab :transient t)
       ("p" "Previous tab" tab-bar-switch-to-prev-tab :transient t)
-      ("1" "Tab 1" (lambda () (interactive) (tab-bar-select-tab 1)) :transient t)
-      ("2" "Tab 2" (lambda () (interactive) (tab-bar-select-tab 2)) :transient t)
-      ("3" "Tab 3" (lambda () (interactive) (tab-bar-select-tab 3)) :transient t)
-      ("4" "Tab 4" (lambda () (interactive) (tab-bar-select-tab 4)) :transient t)]
+      ("1" "Tab 1" (lambda () (interactive) (tab-bar-select-tab 1)))
+      ("2" "Tab 2" (lambda () (interactive) (tab-bar-select-tab 2)))
+      ("3" "Tab 3" (lambda () (interactive) (tab-bar-select-tab 3)))
+      ("4" "Tab 4" (lambda () (interactive) (tab-bar-select-tab 4)))]
      ["Tab Management"
       ("c" "New tab" tab-bar-new-tab)
       ("C" "New tab to..." my/tab-bar-new-tab-to)
