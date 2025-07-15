@@ -161,6 +161,6 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Customize to your needs...
-if [[ -e $LOCAL_ZSHRC ]]; then
-    source $LOCAL_ZSHRC
+if [[ -e "$LOCAL_ZSHRC" ]]; then
+    source "$LOCAL_ZSHRC"
 fi
