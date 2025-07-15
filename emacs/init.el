@@ -58,6 +58,8 @@
     (set-fontset-font t 'hangul (font-spec :family "D2Coding"))
     (set-fontset-font t 'symbol (font-spec :family "Symbola") nil 'prepend)))
 
+(use-package transient :ensure nil)
+
 ;; Ivy/Counsel for better file finding and completion
 (use-package counsel
   :ensure t
@@ -135,13 +137,6 @@
                   ("\\.h\\'" . c++-mode)))
     (add-to-list 'auto-mode-alist mode)))
 
-(use-package treesit-auto
-  :ensure t
-  :custom
-  (treesit-auto-install 'prompt)
-  :config
-  (global-treesit-auto-mode))
-
 (use-package vterm
   :ensure t
   :custom
@@ -169,6 +164,15 @@
 
 (use-package project
   :ensure nil
+  :after transient
+  :custom
+  (project-switch-commands
+   '((project-find-file "Find file")
+     (project-find-regexp "Find regexp")
+     (project-find-dir "Find directory")
+     (project-vterm "Terminal" ?t)
+     (claude-code "Claude Code" ?c)
+     (magit-project-status "Magit" ?g)))
   :config
   (add-to-list 'project-vc-extra-root-markers ".clangd")
   
@@ -179,7 +183,33 @@
     (let* ((default-directory (project-root (project-current t)))
            (project-name (project-name (project-current t)))
            (vterm-buffer-name (format "*vterm-%s*" project-name)))
-      (vterm))))
+      (vterm)))
+
+  (transient-define-prefix my/project-menu ()
+    "Project management menu"
+    [["Find & Search"
+      ("f" "Find file" project-find-file)
+      ("d" "Find directory" project-find-dir)
+      ("r" "Find regexp" project-find-regexp)
+      ("R" "Query replace" project-query-replace-regexp)]
+     ["Buffers & Windows"
+      ("b" "Switch to buffer" project-switch-to-buffer)
+      ("B" "List buffers" project-list-buffers)
+      ("k" "Kill buffers" project-kill-buffers)
+      ("D" "Dired" project-dired)]
+     ["Build & Run"
+      ("c" "Compile" project-compile)
+      ("C" "Configure compile" (lambda () (interactive) (let ((current-prefix-arg '(4))) (call-interactively #'project-compile))))
+      ("v" "Vterm" project-vterm)]
+     ["Project Management"
+      ("p" "Switch project" project-switch-project)
+      ("P" "Forget zombie projects" project-forget-zombie-projects)
+      ("!" "Execute shell command" project-shell-command)
+      ("&" "Async shell command" project-async-shell-command)
+      ("g" "Magit status" magit-project-status)]])
+  
+  :bind (:map project-prefix-map
+              ("m" . my/project-menu)))
 
 (use-package compile
   :ensure nil
@@ -187,8 +217,6 @@
                               (setq-local scroll-conservatively 10000)))
   :config
   (put 'project-compile-command 'safe-local-variable 'stringp))
-
-(use-package transient :ensure nil)
 
 (use-package eglot
   :ensure t
