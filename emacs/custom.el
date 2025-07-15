@@ -6,7 +6,6 @@
  ;; If there is more than one, they won't work right.
  '(auto-save-no-message t)
  '(auto-save-visited-mode t)
- '(claude-code-program-switches '("--dangerously-skip-permissions"))
  '(compilation-scroll-output 'first-error)
  '(default-input-method "korean-hangul390" nil nil "Customized with use-package emacs")
  '(dired-listing-switches "-alh --group-directories-first" nil nil "Customized with use-package emacs")
@@ -23,15 +22,10 @@
      (counsel-describe-symbol . "^") (org-refile . "^")
      (org-agenda-refile . "^") (org-capture-refile . "^")
      (Man-completion-table . "^") (woman . "^")))
- '(package-selected-packages
-   '(ace-window breadcrumb claude-code-ide copilot
-		corfu-terminal counsel dirvish doom-themes eglot
-		git-gutter gruvbox-theme imenu-list magit
-		markdown-mode treesit-auto))
+ '(package-selected-packages nil)
  '(package-vc-selected-packages
-   '((claude-code-ide :url
-		      "https://github.com/manzaltu/claude-code-ide.el"
-		      :branch "main")
+   '((claude-code :url "https://github.com/stevemolitor/claude-code.el"
+		  :branch "main")
      (copilot :url "https://github.com/copilot-emacs/copilot.el"
 	      :branch "main")))
  '(recenter-redisplay nil)

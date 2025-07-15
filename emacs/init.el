@@ -160,7 +160,7 @@
      (project-find-regexp "Find regexp")
      (project-find-dir "Find directory")
      (project-vterm "Terminal" ?t)
-     (claude-code-ide "Claude Code" ?c)
+     (claude-code "Claude Code" ?c)
      (magit-project-status "Magit" ?g)))
   :config
   (add-to-list 'project-vc-extra-root-markers ".clangd")
@@ -203,27 +203,22 @@
 (use-package flycheck
   :ensure t)
 
-(use-package claude-code-ide
-  :ensure t
-  :after (flycheck vterm transient)
-  :vc (:url "https://github.com/manzaltu/claude-code-ide.el"
+(use-package claude-code
+  :ensure nil
+  :after (vterm transient)
+  :vc (:url "https://github.com/stevemolitor/claude-code.el"
 	    :rev :newest
 	    :branch "main")
-  :bind ("C-c c" . my/claude-code-ide-menu)
+  :custom
+  (claude-code-terminal-backend 'vterm)
+  (claude-code-vterm-buffer-multiline-output t)
   :config
-  (transient-define-prefix my/claude-code-ide-menu ()
-    "Claude Code IDE management menu"
-    [["Session Management"
-      ("c" "Start Claude Code" claude-code-ide)
-      ("r" "Resume session" claude-code-ide-resume)
-      ("k" "Stop session" claude-code-ide-stop)
-      ("l" "List sessions" claude-code-ide-list-sessions)]
-     ["Buffer & Navigation"
-      ("b" "Switch to buffer" claude-code-ide-switch-to-buffer)
-      ("n" "Send newline" claude-code-ide-insert-newline)
-      ("e" "Send escape" claude-code-ide-send-escape)]
-     ["Text & Interaction"
-      ("i" "Insert at mentioned" claude-code-ide-insert-at-mentioned)]]))
+  (claude-code-mode)
+  (add-to-list 'display-buffer-alist
+	       '("^\\*claude"
+		 (display-buffer-in-side-window)
+		 (side . right)
+		 (window-width . 90)))  :bind-keymap ("C-c c" . claude-code-command-map))
 
 (use-package compile
   :ensure nil
