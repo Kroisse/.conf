@@ -6,6 +6,9 @@
  ;; If there is more than one, they won't work right.
  '(auto-save-no-message t)
  '(auto-save-visited-mode t)
+ '(claude-code-mode t)
+ '(claude-code-program-switches '("--dangerously-skip-permissions"))
+ '(claude-code-vterm-buffer-multiline-output t)
  '(compilation-scroll-output 'first-error)
  '(default-input-method "korean-hangul390" nil nil "Customized with use-package emacs")
  '(dired-listing-switches "-alh --group-directories-first" nil nil "Customized with use-package emacs")
@@ -41,73 +44,70 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- 
- ;; Magit faces customized for Tango Light theme
- '(magit-branch-current ((t (:foreground "#204a87" :weight bold :box t)))) ; blue-3
- '(magit-branch-local ((t (:foreground "#3465a4")))) ; blue-2
- '(magit-branch-remote ((t (:foreground "#4e9a06")))) ; cham-3
- '(magit-branch-upstream ((t (:foreground "#75507b")))) ; plum-2
- '(magit-branch-warning ((t (:foreground "#f57900")))) ; orange-2
- 
- '(magit-hash ((t (:foreground "#888a85")))) ; alum-4
- '(magit-tag ((t (:foreground "#c4a000")))) ; butter-3
- 
- '(magit-section-heading ((t (:foreground "#c17d11" :weight bold)))) ; choc-2
- '(magit-section-highlight ((t (:background "#eeeeec")))) ; alum-1
- '(magit-section-secondary-heading ((t (:foreground "#8f5902" :weight bold)))) ; choc-3
- 
- '(magit-diff-added ((t (:background "#8ae234" :foreground "#346604")))) ; cham-1 bg, cham-4 fg
- '(magit-diff-added-highlight ((t (:background "#73d216" :foreground "#346604")))) ; cham-2 bg, cham-4 fg
- '(magit-diff-removed ((t (:background "#ef2929" :foreground "#a40000")))) ; red-1 bg, red-3 fg
- '(magit-diff-removed-highlight ((t (:background "#cc0000" :foreground "#eeeeec")))) ; red-2 bg, alum-1 fg
- '(magit-diff-context ((t (:foreground "#5f615c")))) ; alum-5
- '(magit-diff-context-highlight ((t (:background "#d3d7cf" :foreground "#2e3436")))) ; alum-2 bg, alum-6 fg
- 
+ '(magit-bisect-bad ((t (:foreground "#cc0000"))))
+ '(magit-bisect-good ((t (:foreground "#4e9a06"))))
+ '(magit-bisect-skip ((t (:foreground "#f57900"))))
+ '(magit-blame-date ((t (:foreground "#888a85"))))
+ '(magit-blame-heading ((t (:background "#d3d7cf" :foreground "#5f615c"))))
+ '(magit-blame-highlight ((t (:background "#babdb6" :foreground "#2e3436"))))
+ '(magit-blame-name ((t (:foreground "#75507b"))))
+ '(magit-branch-current ((t (:foreground "#204a87" :weight bold :box t))))
+ '(magit-branch-local ((t (:foreground "#3465a4"))))
+ '(magit-branch-remote ((t (:foreground "#4e9a06"))))
+ '(magit-branch-upstream ((t (:foreground "#75507b"))))
+ '(magit-branch-warning ((t (:foreground "#f57900"))))
+ '(magit-diff-added ((t (:background "#8ae234" :foreground "#346604"))))
+ '(magit-diff-added-highlight ((t (:background "#73d216" :foreground "#346604"))))
+ '(magit-diff-context ((t (:foreground "#5f615c"))))
+ '(magit-diff-context-highlight ((t (:background "#d3d7cf" :foreground "#2e3436"))))
  '(magit-diff-file-heading ((t (:weight bold))))
- '(magit-diff-file-heading-highlight ((t (:background "#babdb6" :weight bold)))) ; alum-3
- '(magit-diff-file-heading-selection ((t (:background "#fcaf3e" :foreground "#8f5902")))) ; orange-1 bg, choc-3 fg
- 
- '(magit-diff-hunk-heading ((t (:background "#d3d7cf" :foreground "#5f615c")))) ; alum-2 bg, alum-5 fg
- '(magit-diff-hunk-heading-highlight ((t (:background "#babdb6" :foreground "#2e3436")))) ; alum-3 bg, alum-6 fg
- '(magit-diff-hunk-heading-selection ((t (:background "#fcaf3e" :foreground "#8f5902")))) ; orange-1 bg, choc-3 fg
- 
- '(magit-diff-lines-boundary ((t (:background "#f57900" :foreground "#eeeeec")))) ; orange-2 bg, alum-1 fg
- '(magit-diff-lines-heading ((t (:background "#f57900" :foreground "#eeeeec")))) ; orange-2 bg, alum-1 fg
- 
- '(magit-blame-heading ((t (:background "#d3d7cf" :foreground "#5f615c")))) ; alum-2 bg, alum-5 fg
- '(magit-blame-highlight ((t (:background "#babdb6" :foreground "#2e3436")))) ; alum-3 bg, alum-6 fg
- '(magit-blame-date ((t (:foreground "#888a85")))) ; alum-4
- '(magit-blame-name ((t (:foreground "#75507b")))) ; plum-2
- 
- '(magit-log-author ((t (:foreground "#ce5c00")))) ; orange-3
- '(magit-log-date ((t (:foreground "#888a85")))) ; alum-4
- '(magit-log-graph ((t (:foreground "#5f615c")))) ; alum-5
- 
- '(magit-process-ok ((t (:foreground "#4e9a06" :weight bold)))) ; cham-3
- '(magit-process-ng ((t (:foreground "#cc0000" :weight bold)))) ; red-2
- 
- '(magit-reflog-amend ((t (:foreground "#75507b")))) ; plum-2
- '(magit-reflog-checkout ((t (:foreground "#3465a4")))) ; blue-2
- '(magit-reflog-cherry-pick ((t (:foreground "#4e9a06")))) ; cham-3
- '(magit-reflog-commit ((t (:foreground "#4e9a06")))) ; cham-3
- '(magit-reflog-merge ((t (:foreground "#4e9a06")))) ; cham-3
- '(magit-reflog-other ((t (:foreground "#06989a")))) ; cyan-2
- '(magit-reflog-rebase ((t (:foreground "#75507b")))) ; plum-2
- '(magit-reflog-remote ((t (:foreground "#06989a")))) ; cyan-2
- '(magit-reflog-reset ((t (:foreground "#cc0000")))) ; red-2
- 
- '(magit-bisect-bad ((t (:foreground "#cc0000")))) ; red-2
- '(magit-bisect-good ((t (:foreground "#4e9a06")))) ; cham-3
- '(magit-bisect-skip ((t (:foreground "#f57900")))) ; orange-2
- 
- '(magit-sequence-pick ((t (:foreground "#c17d11")))) ; choc-2
- '(magit-sequence-drop ((t (:foreground "#cc0000")))) ; red-2
- '(magit-sequence-done ((t (:foreground "#888a85")))) ; alum-4
- '(magit-sequence-onto ((t (:foreground "#888a85")))) ; alum-4
- 
- '(magit-dimmed ((t (:foreground "#888a85")))) ; alum-4
+ '(magit-diff-file-heading-highlight ((t (:background "#babdb6" :weight bold))))
+ '(magit-diff-file-heading-selection ((t (:background "#fcaf3e" :foreground "#8f5902"))))
+ '(magit-diff-hunk-heading ((t (:background "#d3d7cf" :foreground "#5f615c"))))
+ '(magit-diff-hunk-heading-highlight ((t (:background "#babdb6" :foreground "#2e3436"))))
+ '(magit-diff-hunk-heading-selection ((t (:background "#fcaf3e" :foreground "#8f5902"))))
+ '(magit-diff-lines-boundary ((t (:background "#f57900" :foreground "#eeeeec"))))
+ '(magit-diff-lines-heading ((t (:background "#f57900" :foreground "#eeeeec"))))
+ '(magit-diff-removed ((t (:background "#ef2929" :foreground "#a40000"))))
+ '(magit-diff-removed-highlight ((t (:background "#cc0000" :foreground "#eeeeec"))))
+ '(magit-dimmed ((t (:foreground "#888a85"))))
+ '(magit-hash ((t (:foreground "#888a85"))))
  '(magit-header-line ((t (:inherit nil :weight bold))))
  '(magit-header-line-log-select ((t (:inherit nil :weight bold))))
- )
+ '(magit-log-author ((t (:foreground "#ce5c00"))))
+ '(magit-log-date ((t (:foreground "#888a85"))))
+ '(magit-log-graph ((t (:foreground "#5f615c"))))
+ '(magit-process-ng ((t (:foreground "#cc0000" :weight bold))))
+ '(magit-process-ok ((t (:foreground "#4e9a06" :weight bold))))
+ '(magit-reflog-amend ((t (:foreground "#75507b"))))
+ '(magit-reflog-checkout ((t (:foreground "#3465a4"))))
+ '(magit-reflog-cherry-pick ((t (:foreground "#4e9a06"))))
+ '(magit-reflog-commit ((t (:foreground "#4e9a06"))))
+ '(magit-reflog-merge ((t (:foreground "#4e9a06"))))
+ '(magit-reflog-other ((t (:foreground "#06989a"))))
+ '(magit-reflog-rebase ((t (:foreground "#75507b"))))
+ '(magit-reflog-remote ((t (:foreground "#06989a"))))
+ '(magit-reflog-reset ((t (:foreground "#cc0000"))))
+ '(magit-section-heading ((t (:foreground "#c17d11" :weight bold))))
+ '(magit-section-highlight ((t (:background "#eeeeec"))))
+ '(magit-section-secondary-heading ((t (:foreground "#8f5902" :weight bold))))
+ '(magit-sequence-done ((t (:foreground "#888a85"))))
+ '(magit-sequence-drop ((t (:foreground "#cc0000"))))
+ '(magit-sequence-onto ((t (:foreground "#888a85"))))
+ '(magit-sequence-pick ((t (:foreground "#c17d11"))))
+ '(magit-tag ((t (:foreground "#c4a000"))))
+ '(transient-argument ((t (:foreground "#4e9a06"))))
+ '(transient-disabled-suffix ((t (:foreground "#888a85"))))
+ '(transient-enabled-suffix ((t (:foreground "#4e9a06" :weight bold))))
+ '(transient-heading ((t (:foreground "#c17d11" :weight bold))))
+ '(transient-inactive-argument ((t (:foreground "#888a85"))))
+ '(transient-inactive-value ((t (:foreground "#888a85"))))
+ '(transient-key ((t (:foreground "#204a87" :weight bold))))
+ '(transient-mismatched-key ((t (:foreground "#cc0000" :underline t))))
+ '(transient-nonstandard-key ((t (:foreground "#f57900" :underline t))))
+ '(transient-separator ((t (:foreground "#d3d7cf"))))
+ '(transient-unreachable ((t (:foreground "#babdb6"))))
+ '(transient-unreachable-key ((t (:foreground "#babdb6"))))
+ '(transient-value ((t (:foreground "#75507b")))))
 
 ;;; custom.el ends here
