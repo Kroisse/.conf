@@ -218,7 +218,8 @@
 	       '("^\\*claude"
 		 (display-buffer-in-side-window)
 		 (side . right)
-		 (window-width . 90)))  :bind-keymap ("C-c c" . claude-code-command-map))
+		 (window-width . 90)))
+  :bind-keymap ("C-c c" . claude-code-command-map))
 
 (use-package compile
   :ensure nil
@@ -310,24 +311,7 @@
 	 ("C-x M-g" . magit-dispatch)
 	 ("C-c M-g" . magit-file-dispatch))
   :custom
-  (magit-diff-refine-hunk t)
-  :custom-face
-  (magit-popup-key ((t (:foreground "#0969da" :weight bold))))
-  (magit-popup-heading ((t (:foreground "#24292f" :weight bold))))
-  (magit-popup-option-value ((t (:foreground "#cf222e"))))
-  (magit-section-highlight ((t (:background "#f6f8fa"))))
-  (magit-diff-added ((t (:background "#d1f4d0" :foreground "#116329"))))
-  (magit-diff-removed ((t (:background "#ffeef0" :foreground "#82071e"))))
-  (magit-diff-added-highlight ((t (:background "#a7f3d0" :foreground "#116329"))))
-  (magit-diff-removed-highlight ((t (:background "#fecdd3" :foreground "#82071e"))))
-  (transient-key ((t (:foreground "#0969da" :weight bold))))
-  (transient-heading ((t (:foreground "#24292f" :weight bold))))
-  (transient-value ((t (:foreground "#cf222e"))))
-  (transient-argument ((t (:foreground "#8250df"))))
-  (transient-unreachable ((t (:foreground "#6e7781"))))
-  (transient-inapt-suffix ((t (:foreground "#6e7781"))))
-  (transient-inactive-argument ((t (:foreground "#6e7781"))))
-  (transient-inactive-value ((t (:foreground "#6e7781")))))
+  (magit-diff-refine-hunk t))
 
 (use-package git-gutter
   :ensure t
