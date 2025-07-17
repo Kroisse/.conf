@@ -8,8 +8,8 @@
  '(auto-save-visited-mode t)
  '(claude-code-mode t)
  '(claude-code-program-switches '("--dangerously-skip-permissions"))
- '(claude-code-vterm-buffer-multiline-output t)
  '(compilation-scroll-output 'first-error)
+ '(confirm-kill-emacs 'y-or-n-p)
  '(default-input-method "korean-hangul390" nil nil "Customized with use-package emacs")
  '(dired-listing-switches "-alh --group-directories-first" nil nil "Customized with use-package emacs")
  '(dirvish-attributes

@@ -232,6 +232,7 @@
   :ensure t
   :after transient
   :hook ((c-mode c++-mode) . my/eglot-ensure-with-project-root)
+        (python-mode . my/eglot-ensure-with-project-root)
   :custom
   (eglot-autoshutdown t)
   (eglot-extend-to-xref t)
@@ -243,6 +244,8 @@
 		    "--clang-tidy"
 		    "--enable-config"
 		    "--header-insertion=never")))
+  (add-to-list 'eglot-server-programs
+	       '(python-mode . ("pyright-langserver" "--stdio")))
   (defun my/eglot-ensure-with-project-root ()
     "Ensure Eglot is started with the project root."
     (when-let ((project (project-current)))
@@ -265,9 +268,10 @@
       ("F" "Format region" eglot-format)
       ("o" "Organize imports" eglot-code-action-organize-imports)]
      ["Documentation"
-      ("h" "Help at point" eglot-help-at-point)
+      ; ("h" "Help at point" eglot-help-at-point)
       ("H" "Eldoc" eldoc)
-      ("s" "Signature help" eglot-signature-help)]
+      ; ("s" "Signature help" eglot-signature-help)
+      ]
      ["Server Management"
       ("S" "Start/restart server" eglot-reconnect)
       ("Q" "Shutdown server" eglot-shutdown)
