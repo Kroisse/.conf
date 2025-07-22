@@ -447,4 +447,9 @@
   :config
   (ace-window-display-mode 1))
 
+; Load local configuration file if it exists
+(let ((local-file (expand-file-name "init-local.el" user-emacs-directory)))
+  (when (file-exists-p local-file)
+    (load local-file)))
+
 ;;; init.el ends here
