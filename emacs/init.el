@@ -53,11 +53,11 @@
   :ensure nil
   :config
   (load-theme 'tango t)
-  (when (display-graphic-p)
-    (set-face-attribute 'default nil :height 90)
-    (set-fontset-font t 'unicode "Noto Color Emoji" nil 'prepend)
-    (set-fontset-font t 'hangul (font-spec :family "D2Coding"))
-    (set-fontset-font t 'symbol (font-spec :family "Symbola") nil 'prepend)))
+  (set-face-attribute 'default nil :family "Noto Sans Mono" :height 80)
+  (set-fontset-font t 'latin (font-spec :family "Fira Code" :weight 'normal))
+  (set-fontset-font t 'unicode "Noto Color Emoji" nil 'prepend)
+  (set-fontset-font t 'hangul (font-spec :family "Noto Sans"))
+  (set-fontset-font t 'symbol (font-spec :family "Symbola") nil 'prepend))
 
 (use-package transient :ensure nil)
 
