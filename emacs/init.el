@@ -25,6 +25,7 @@
   (vc-follow-symlinks t)
   (global-auto-revert-mode t)
   (inhibit-compacting-font-caches t)
+  (which-key-mode t)
   (xterm-mouse-mode t)
   :config
   (prefer-coding-system 'utf-8)
@@ -43,6 +44,7 @@
       (set-window-dedicated-p (selected-window) (not dedicated))
       (message "Window %s" (if dedicated "undedicated" "dedicated"))))
   :bind (("C-\\" . toggle-input-method)
+	 ("C-x \\" . toggle-input-method)
          ("C-x k" . kill-current-buffer)
          ("C-c w d" . toggle-window-dedicated)
          ("C-t" . nil)))
@@ -51,8 +53,8 @@
   :ensure nil
   :config
   (load-theme 'tango t)
-  (set-face-attribute 'default nil :background "unspecified-bg" :foreground "black")
   (when (display-graphic-p)
+    (set-face-attribute 'default nil :height 90)
     (set-fontset-font t 'unicode "Noto Color Emoji" nil 'prepend)
     (set-fontset-font t 'hangul (font-spec :family "D2Coding"))
     (set-fontset-font t 'symbol (font-spec :family "Symbola") nil 'prepend)))
@@ -70,6 +72,7 @@
          ("C-c j" . counsel-git-grep)  ; Grep in git project
          ("C-c k" . counsel-rg))       ; ag/ripgrep search
   :custom
+  (ivy-mode t)
   (ivy-use-virtual-buffers t)          ; Add recent files to switch-buffer
   (ivy-count-format "(%d/%d) ")        ; Show current/total in minibuffer)
   (ivy-height 10)                      ; Number of result lines to display
@@ -80,7 +83,6 @@
   (swiper-action-recenter t)
   (ivy-dynamic-exhibit-delay-ms 150)   ; Reduce input delay
   :config
-  (ivy-mode 1)
   (setq swiper-goto-start-of-match t))
 
 (use-package dirvish
