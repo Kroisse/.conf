@@ -45,7 +45,6 @@
       (message "Window %s" (if dedicated "undedicated" "dedicated"))))
   :bind (("C-\\" . toggle-input-method)
 	 ("C-x \\" . toggle-input-method)
-         ("C-x k" . kill-current-buffer)
          ("C-c w d" . toggle-window-dedicated)
          ("C-t" . nil)))
 
@@ -220,7 +219,7 @@
 	       '("^\\*claude"
 		 (display-buffer-in-side-window)
 		 (side . right)
-		 (window-width . 90)))
+		 (window-width . 100)))
   :bind-keymap ("C-c c" . claude-code-command-map))
 
 (use-package compile
@@ -373,72 +372,6 @@
               ("M-h" . corfu-info-documentation)
               ("M-g" . corfu-info-location)))
 
-(use-package desktop
-  :ensure nil
-  :custom
-  (desktop-restore-frames t)
-  :config
-  (desktop-save-mode 1)
-  :hook
-  (server-done . desktop-save-in-desktop-dir))
-
-(use-package tab-bar
-  :ensure nil
-  :after transient
-  :custom
-  (tab-bar-show t)
-  (tab-bar-close-button-show nil)
-  (tab-bar-new-button-show nil)
-  (tab-bar-tab-hints t)
-  :config
-  (tab-bar-mode 1)
-  
-  (defun my/tab-bar-new-tab-to ()
-    "Create new tab and switch to directory."
-    (interactive)
-    (tab-bar-new-tab)
-    (call-interactively #'counsel-find-file))
-  
-  (defun my/tab-bar-close-other-tabs ()
-    "Close all tabs except current one."
-    (interactive)
-    (tab-bar-close-other-tabs))
-  
-  (defun my/tab-bar-rename-tab-with-project ()
-    "Rename tab with project name if in project."
-    (interactive)
-    (let ((project (project-current)))
-      (if project
-          (tab-bar-rename-tab (project-name project))
-        (call-interactively #'tab-bar-rename-tab))))
-
-  (transient-define-prefix my/tab-bar-menu ()
-    "Tab bar management menu"
-    [["Tab Navigation"
-      ("n" "Next tab" tab-bar-switch-to-next-tab :transient t)
-      ("p" "Previous tab" tab-bar-switch-to-prev-tab :transient t)
-      ("1" "Tab 1" (lambda () (interactive) (tab-bar-select-tab 1)))
-      ("2" "Tab 2" (lambda () (interactive) (tab-bar-select-tab 2)))
-      ("3" "Tab 3" (lambda () (interactive) (tab-bar-select-tab 3)))
-      ("4" "Tab 4" (lambda () (interactive) (tab-bar-select-tab 4)))]
-     ["Tab Management"
-      ("c" "New tab" tab-bar-new-tab)
-      ("C" "New tab to..." my/tab-bar-new-tab-to)
-      ("x" "Close tab" tab-bar-close-tab)
-      ("X" "Close other tabs" my/tab-bar-close-other-tabs)
-      ("r" "Rename tab" my/tab-bar-rename-tab-with-project)
-      ("u" "Undo close tab" tab-bar-undo-close-tab)]
-     ["Tab Actions"
-      ("d" "Duplicate tab" tab-bar-duplicate-tab)
-      ("g" "Switch to tab..." tab-bar-switch-to-tab)
-      ("t" "Toggle tab bar" tab-bar-mode)]])
-  
-  :bind (("C-x t" . my/tab-bar-menu)
-         ("s-1" . (lambda () (interactive) (tab-bar-select-tab 1)))
-         ("s-2" . (lambda () (interactive) (tab-bar-select-tab 2)))
-         ("s-3" . (lambda () (interactive) (tab-bar-select-tab 3)))
-	 ("s-4" . (lambda () (interactive) (tab-bar-select-tab 4)))))
-
 (use-package ace-window
   :ensure t
   :bind ("C-x o" . ace-window)
@@ -448,6 +381,25 @@
   (aw-background t)                        ; Dim other windows
   :config
   (ace-window-display-mode 1))
+
+(use-package perspective
+  :ensure t
+  :after (counsel project)
+  :bind
+  (("C-x C-b" . persp-list-buffers)
+   ("C-x b" . persp-switch-to-buffer*)
+   ("C-x k" . persp-kill-buffer*))
+  :custom
+  (persp-mode-prefix-key (kbd "C-c p"))
+  (persp-interactive-completion-function #'ivy-completing-read)
+  (persp-state-default-file (expand-file-name "persp-state" user-emacs-directory))
+  (persp-show-modestring 'header)
+  :hook
+  ((kill-emacs . #'persp-state-save)
+   (project-switch-project . (lambda ()
+			       (persp-switch (project-name (project-current))))))
+  :init
+  (persp-mode))
 
 ; Load local configuration file if it exists
 (let ((local-file (expand-file-name "init-local.el" user-emacs-directory)))

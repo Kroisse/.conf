@@ -28,10 +28,9 @@
  '(package-selected-packages
    '(ace-window breadcrumb claude-code copilot corfu-terminal counsel
 		dirvish eglot flycheck git-gutter gruvbox-theme
-		imenu-list magit markdown-mode vterm))
+		imenu-list magit markdown-mode perspective vterm))
  '(package-vc-selected-packages
-   '((claude-code :url
-		  "https://github.com/stevemolitor/claude-code.el"
+   '((claude-code :url "https://github.com/stevemolitor/claude-code.el"
 		  :branch "main")
      (copilot :url "https://github.com/copilot-emacs/copilot.el"
 	      :branch "main")))
