@@ -1,6 +1,7 @@
 TOP := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 
 ALACRITTY_D := $(HOME)/.config/alacritty
+CLAUDE_D := $(HOME)/.claude
 EMACS_D := $(HOME)/.emacs.d
 EMACS_INIT := $(HOME)/.emacs.d/init.el
 EMACS_CUSTOM := $(HOME)/.emacs.d/custom.el
@@ -10,12 +11,19 @@ TMUX_CONF := $(HOME)/.tmux.conf
 VSCODE_SETTINGS := $(HOME)/Library/Application\ Support/Code/User/settings.json
 ZSHRC := $(HOME)/.zshrc
 
-install: install-alacritty install-emacs install-git install-tmux install-vscode install-zsh
+install: install-alacritty install-claude install-emacs install-git install-tmux install-vscode install-zsh
 
 install-alacritty:
 	-rm -ri $(ALACRITTY_D)
 	mkdir -p $(dir $(ALACRITTY_D))
 	ln -s $(TOP)alacritty $(ALACRITTY_D)
+
+install-claude:
+	mkdir -p $(CLAUDE_D)
+	-rm -ri $(CLAUDE_D)/agents $(CLAUDE_D)/hooks $(CLAUDE_D)/commands
+	ln -s $(TOP)claude/agents $(CLAUDE_D)/agents
+	ln -s $(TOP)claude/hooks $(CLAUDE_D)/hooks
+	ln -s $(TOP)claude/commands $(CLAUDE_D)/commands
 
 install-emacs:
 	mkdir -p $(EMACS_D)
