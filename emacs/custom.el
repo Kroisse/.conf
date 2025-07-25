@@ -28,7 +28,8 @@
  '(package-selected-packages
    '(ace-window breadcrumb claude-code copilot corfu-terminal counsel
 		dirvish eglot flycheck git-gutter gruvbox-theme
-		imenu-list magit markdown-mode perspective vterm))
+		helpful imenu-list magit marginalia markdown-mode
+		perspective vterm))
  '(package-vc-selected-packages
    '((claude-code :url "https://github.com/stevemolitor/claude-code.el"
 		  :branch "main")

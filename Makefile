@@ -1,18 +1,27 @@
 TOP := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 
 ALACRITTY_D := $(HOME)/.config/alacritty
+EMACS_D := $(HOME)/.emacs.d
+EMACS_INIT := $(HOME)/.emacs.d/init.el
+EMACS_CUSTOM := $(HOME)/.emacs.d/custom.el
 GITCONFIG := $(HOME)/.gitconfig
 GITIGNORE := $(HOME)/.gitignore_global
 TMUX_CONF := $(HOME)/.tmux.conf
 VSCODE_SETTINGS := $(HOME)/Library/Application\ Support/Code/User/settings.json
 ZSHRC := $(HOME)/.zshrc
 
-install: install-alacritty install-git install-tmux install-vscode install-zsh
+install: install-alacritty install-emacs install-git install-tmux install-vscode install-zsh
 
 install-alacritty:
 	-rm -ri $(ALACRITTY_D)
 	mkdir -p $(dir $(ALACRITTY_D))
 	ln -s $(TOP)alacritty $(ALACRITTY_D)
+
+install-emacs:
+	mkdir -p $(EMACS_D)
+	-rm -i $(EMACS_INIT) $(EMACS_CUSTOM)
+	ln -s $(TOP)emacs/init.el $(EMACS_INIT)
+	ln -s $(TOP)emacs/custom.el $(EMACS_CUSTOM)
 
 install-git:
 	-rm -i $(GITCONFIG) $(GITIGNORE)

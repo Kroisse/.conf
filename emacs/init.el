@@ -18,6 +18,10 @@
   :ensure nil
   :init
   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+  ;; Performance improvements
+  (setq gc-cons-threshold (* 50 1000 1000)) ; 50MB during init
+  (add-hook 'emacs-startup-hook
+            (lambda () (setq gc-cons-threshold (* 8 1000 1000)))) ; 8MB after init
   :custom
   (current-language-environment "Korean")
   (default-input-method "korean-hangul390")
@@ -26,7 +30,12 @@
   (global-auto-revert-mode t)
   (inhibit-compacting-font-caches t)
   (which-key-mode t)
+  (which-key-idle-delay 0.5)           ; Show which-key popup after 0.5s
   (xterm-mouse-mode t)
+  (electric-pair-mode t)               ; Auto-close brackets and quotes
+  (show-paren-mode t)                  ; Highlight matching parens
+  (column-number-mode t)               ; Show column number in mode line
+  (delete-selection-mode t)            ; Replace selected text when typing
   :config
   (prefer-coding-system 'utf-8)
   (set-language-environment "UTF-8")
@@ -36,8 +45,7 @@
   (setq locale-coding-system 'utf-8)
   (when (file-exists-p custom-file)
     (load custom-file 'noerror))
-  :config
-  (defun toggle-window-dedicated ()
+  (defun my/toggle-window-dedicated ()
     "Toggle window dedication for the current window."
     (interactive)
     (let ((dedicated (window-dedicated-p)))
@@ -45,7 +53,8 @@
       (message "Window %s" (if dedicated "undedicated" "dedicated"))))
   :bind (("C-\\" . toggle-input-method)
 	 ("C-x \\" . toggle-input-method)
-         ("C-c w d" . toggle-window-dedicated)
+	 ("C-SPC" . toggle-input-method)
+         ("C-c w d" . my/toggle-window-dedicated)
          ("C-t" . nil)))
 
 (use-package emacs
@@ -75,14 +84,35 @@
   (ivy-use-virtual-buffers t)          ; Add recent files to switch-buffer
   (ivy-count-format "(%d/%d) ")        ; Show current/total in minibuffer)
   (ivy-height 10)                      ; Number of result lines to display
+  (ivy-wrap t)                         ; Wrap around at the end of candidates
+  (ivy-fixed-height-minibuffer t)     ; Fixed height minibuffer
   (ivy-re-builders-alist '((swiper . ivy--regex-plus)
-                           (t . ivy--regex-plus))) ; Space-separated words matching
+                           (t . ivy--regex-fuzzy))) ; Fuzzy matching for most commands
   (swiper-use-visual-line nil)
   (swiper-include-line-number-in-search t)
   (swiper-action-recenter t)
   (ivy-dynamic-exhibit-delay-ms 150)   ; Reduce input delay
   :config
-  (setq swiper-goto-start-of-match t))
+  (setq swiper-goto-start-of-match t)
+  ;; Remove initial ^ from most commands
+  (setq ivy-initial-inputs-alist nil))
+
+(use-package marginalia
+  :ensure t
+  :after counsel
+  :custom
+  (marginalia-align 'right)   ; Align annotations to the right
+  (marginalia-max-relative-age 0) ; Show absolute age
+  :init
+  (marginalia-mode))
+
+(use-package helpful
+  :ensure t
+  :bind (("C-h f" . helpful-callable)
+         ("C-h v" . helpful-variable)
+         ("C-h k" . helpful-key)
+         ("C-h x" . helpful-command)
+         ("C-c C-d" . helpful-at-point)))
 
 (use-package dirvish
   :ensure t
@@ -281,6 +311,14 @@
   
   :bind (:map eglot-mode-map
 	      ("C-c l" . my/eglot-menu)))
+
+(use-package eldoc
+  :ensure nil
+  :custom
+  (eldoc-idle-delay 0.3)              ; Faster eldoc display
+  (eldoc-echo-area-use-multiline-p t) ; Allow multiline eldoc
+  :config
+  (global-eldoc-mode 1))
 
 (use-package flymake
   :ensure nil
