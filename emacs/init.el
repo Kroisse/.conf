@@ -107,6 +107,7 @@
   (ivy-wrap t)                         ; Wrap around at the end of candidates
   (ivy-fixed-height-minibuffer t)     ; Fixed height minibuffer
   (ivy-re-builders-alist '((swiper . ivy--regex-plus)
+                           (read-shell-command . ivy--regex-plus)
                            (t . ivy--regex-plus))) ; Space-separated words matching
   (swiper-use-visual-line nil)
   (swiper-include-line-number-in-search t)
@@ -225,6 +226,13 @@
            (vterm-buffer-name (format "*vterm-%s*" project-name)))
       (vterm)))
 
+  (defun my/project-counsel-compile ()
+    "Run counsel-compile in project root with project-compile-command support."
+    (interactive)
+    (let* ((default-directory (project-root (project-current t)))
+           (compile-command (or project-compile-command compile-command)))
+      (counsel-compile)))
+
   (transient-define-prefix my/project-menu ()
     "Project management menu"
     [["Find & Search"
@@ -238,7 +246,7 @@
       ("k" "Kill buffers" project-kill-buffers)
       ("D" "Dired" project-dired)]
      ["Build & Run"
-      ("c" "Compile" project-compile)
+      ("c" "Compile" my/project-counsel-compile)
       ("C" "Configure compile" (lambda () (interactive) (let ((current-prefix-arg '(4))) (call-interactively #'project-compile))))
       ("v" "Vterm" project-vterm)]
      ["Project Management"
@@ -249,7 +257,8 @@
       ("g" "Magit status" magit-project-status)]])
   
   :bind (:map project-prefix-map
-              ("m" . my/project-menu)))
+              ("m" . my/project-menu)
+              ("c" . my/project-counsel-compile)))
 
 (use-package flycheck
   :ensure t)
