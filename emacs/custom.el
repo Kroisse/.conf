@@ -19,6 +19,7 @@
  '(dirvish-side-attributes '(vc-state))
  '(dirvish-side-follow-mode t)
  '(dirvish-subtree-state-style 'plus)
+ '(global-whitespace-mode t)
  '(ivy-initial-inputs-alist
    '((counsel-package . "^+") (counsel-org-capture . "^")
      (counsel-minor . "^+") (counsel-M-x . "")
@@ -39,7 +40,12 @@
  '(vterm-clear-scrollback-when-clearing t)
  '(vterm-min-window-width 40)
  '(warning-suppress-log-types
-   '((copilot copilot-no-mode-indent) (copilot copilot-exceeds-max-char))))
+   '((copilot copilot-no-mode-indent) (copilot copilot-exceeds-max-char)))
+ '(whitespace-line-column 120)
+ '(whitespace-style
+   '(face trailing tabs lines newline missing-newline-at-eof empty
+	  indentation space-after-tab space-before-tab tab-mark
+	  newline-mark)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

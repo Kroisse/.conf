@@ -87,7 +87,7 @@
   (ivy-wrap t)                         ; Wrap around at the end of candidates
   (ivy-fixed-height-minibuffer t)     ; Fixed height minibuffer
   (ivy-re-builders-alist '((swiper . ivy--regex-plus)
-                           (t . ivy--regex-fuzzy))) ; Fuzzy matching for most commands
+                           (t . ivy--regex-plus))) ; Space-separated words matching
   (swiper-use-visual-line nil)
   (swiper-include-line-number-in-search t)
   (swiper-action-recenter t)
@@ -438,6 +438,11 @@
 			       (persp-switch (project-name (project-current))))))
   :init
   (persp-mode))
+
+(use-package editorconfig
+  :ensure nil
+  :custom
+  (editorconfig-mode t))
 
 ; Load local configuration file if it exists
 (let ((local-file (expand-file-name "init-local.el" user-emacs-directory)))
