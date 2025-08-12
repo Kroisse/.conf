@@ -185,7 +185,8 @@
                   ("\\.toml\\'" . toml-ts-mode)
                   ("\\.ya?ml\\'" . yaml-ts-mode)
                   ("\\.hpp\\'" . c++-mode)
-                  ("\\.h\\'" . c++-mode)))
+                  ("\\.h\\'" . c++-mode)
+                  ("\\.rs\\'" . rustic-mode)))
     (add-to-list 'auto-mode-alist mode)))
 
 (use-package vterm
@@ -306,6 +307,8 @@
 		    "--header-insertion=never")))
   (add-to-list 'eglot-server-programs
 	       '(python-mode . ("pyright-langserver" "--stdio")))
+  (add-to-list 'eglot-server-programs
+	       '(rustic-mode . ("rust-analyzer")))
   (defun my/eglot-ensure-with-project-root ()
     "Ensure Eglot is started with the project root."
     (when-let ((project (project-current)))
@@ -546,6 +549,16 @@
 			       (persp-switch (project-name (project-current))))))
   :init
   (persp-mode))
+
+(use-package rustic
+  :ensure t
+  :mode ("\\.rs\\'" . rustic-mode)
+  :hook (rustic-mode . my/eglot-ensure-with-project-root)
+  :custom
+  (rustic-format-on-save t)
+  (rustic-lsp-client 'eglot)
+  :config
+  (setq rustic-format-trigger 'on-save))
 
 (use-package editorconfig
   :ensure nil
