@@ -107,7 +107,8 @@
   (ivy-wrap t)                         ; Wrap around at the end of candidates
   (ivy-fixed-height-minibuffer t)     ; Fixed height minibuffer
   (ivy-re-builders-alist '((swiper . ivy--regex-plus)
-                           (read-shell-command . ivy--regex-plus)
+                           (read-shell-command . ivy--regex)
+                           (counsel-compile . regexp-quote)
                            (t . ivy--regex-plus))) ; Space-separated words matching
   (swiper-use-visual-line nil)
   (swiper-include-line-number-in-search t)
@@ -264,6 +265,9 @@
 (use-package flycheck
   :ensure t)
 
+(use-package monet
+  :vc (:url "https://github.com/stevemolitor/monet" :rev :newest))
+
 (use-package claude-code
   :ensure nil
   :after (vterm transient)
@@ -280,6 +284,8 @@
 		 (display-buffer-in-side-window)
 		 (side . right)
 		 (window-width . 100)))
+  (add-hook 'claude-code-process-environment-functions #'monet-start-server-function)
+  (monet-mode 1)
   :bind-keymap ("C-c c" . claude-code-command-map))
 
 (use-package compile
@@ -387,6 +393,12 @@
 	 ("C-c M-g" . magit-file-dispatch))
   :custom
   (magit-diff-refine-hunk t)
+  :config
+  (add-to-list 'display-buffer-alist
+	       '("^\\*magit"
+		 (display-buffer-in-side-window)
+		 (side . bottom)
+		 (window-height . 15)))
   :custom-face
   (magit-bisect-bad ((t (:inherit my-status-bad-base))))
   (magit-bisect-good ((t (:inherit my-status-good-base))))
