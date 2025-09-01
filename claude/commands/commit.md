@@ -1,4 +1,5 @@
 PROACTIVELY use the git-expert agent when creating git commits to ensure proper Conventional Commit formatting and commit message quality.
+PREFER atomic commits.
 Check git status and recent commits to understand the current state.
 If submodules exist, check their status first and commit any changes in submodules, then ask the user whether to proceed with committing the parent repository.
 Analyze all staged and unstaged changes to understand what work has been done.
