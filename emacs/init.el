@@ -48,6 +48,7 @@
   (menu-bar-mode nil)
   (vc-follow-symlinks t)
   (global-auto-revert-mode t)
+  (indent-tabs-mode nil)
   (inhibit-compacting-font-caches t)
   (which-key-mode t)
   (which-key-idle-delay 0.5)           ; Show which-key popup after 0.5s
@@ -72,8 +73,8 @@
       (set-window-dedicated-p (selected-window) (not dedicated))
       (message "Window %s" (if dedicated "undedicated" "dedicated"))))
   :bind (("C-\\" . toggle-input-method)
-	 ("C-x \\" . toggle-input-method)
-	 ("C-SPC" . toggle-input-method)
+         ("C-x \\" . toggle-input-method)
+         ; ("C-SPC" . toggle-input-method)
          ("C-c w d" . my/toggle-window-dedicated)
          ("C-t" . nil)))
 
@@ -93,7 +94,7 @@
 (use-package counsel
   :ensure t
   :bind (("C-s" . swiper)      ; Better search
-	 ("C-r" . swiper-backward) ; Better backward search
+         ("C-r" . swiper-backward) ; Better backward search
          ("M-x" . counsel-M-x)         ; Better M-x
          ("C-x C-f" . counsel-find-file) ; Better find file
          ("C-c g" . counsel-git)       ; Find file in git project
@@ -154,9 +155,9 @@
   :ensure t
   :hook (prog-mode . copilot-mode)
   :bind (:map copilot-completion-map
-	      ("<tab>" . copilot-accept-completion)
-	      ("TAB" . copilot-accept-completion)
-	      ("C-TAB" . copilot-accept-completion-by-word)))
+              ("<tab>" . copilot-accept-completion)
+              ("TAB" . copilot-accept-completion)
+              ("C-TAB" . copilot-accept-completion-by-word)))
 
 
 (use-package markdown-mode
@@ -218,7 +219,7 @@
      (magit-project-status "Magit" ?g)))
   :config
   (add-to-list 'project-vc-extra-root-markers ".clangd")
-  
+
   ;; Add vterm to project switch commands
   (defun project-vterm ()
     "Start vterm in the current project's root."
@@ -257,7 +258,7 @@
       ("!" "Execute shell command" project-shell-command)
       ("&" "Async shell command" project-async-shell-command)
       ("g" "Magit status" magit-project-status)]])
-  
+
   :bind (:map project-prefix-map
               ("m" . my/project-menu)
               ("c" . my/project-counsel-compile)))
@@ -272,18 +273,18 @@
   :ensure nil
   :after (vterm transient)
   :vc (:url "https://github.com/stevemolitor/claude-code.el"
-	    :rev :newest
-	    :branch "main")
+            :rev :newest
+            :branch "main")
   :custom
   (claude-code-terminal-backend 'vterm)
   (claude-code-vterm-buffer-multiline-output t)
   :config
   (claude-code-mode)
   (add-to-list 'display-buffer-alist
-	       '("^\\*claude"
-		 (display-buffer-in-side-window)
-		 (side . right)
-		 (window-width . 100)))
+               '("^\\*claude"
+                 (display-buffer-in-side-window)
+                 (side . right)
+                 (window-width . 100)))
   (add-hook 'claude-code-process-environment-functions #'monet-start-server-function)
   (monet-mode 1)
   :bind-keymap ("C-c c" . claude-code-command-map))
@@ -305,21 +306,21 @@
   (eglot-extend-to-xref t)
   :config
   (add-to-list 'eglot-server-programs
-	       '((c-mode c++-mode)
-		 . ("clangd"
-		    "--background-index"
-		    "--clang-tidy"
-		    "--enable-config"
-		    "--header-insertion=never")))
+               '((c-mode c++-mode)
+                 . ("clangd"
+                    "--background-index"
+                    "--clang-tidy"
+                    "--enable-config"
+                    "--header-insertion=never")))
   (add-to-list 'eglot-server-programs
-	       '(python-mode . ("pyright-langserver" "--stdio")))
+               '(python-mode . ("pyright-langserver" "--stdio")))
   (add-to-list 'eglot-server-programs
-	       '(rustic-mode . ("rust-analyzer")))
+               '(rustic-mode . ("rust-analyzer")))
   (defun my/eglot-ensure-with-project-root ()
     "Ensure Eglot is started with the project root."
     (when-let ((project (project-current)))
       (let ((default-directory (project-root project)))
-	(eglot-ensure))))
+        (eglot-ensure))))
 
   (transient-define-prefix my/eglot-menu ()
     "Eglot LSP management menu"
@@ -346,9 +347,9 @@
       ("Q" "Shutdown server" eglot-shutdown)
       ("=" "Show events" eglot-events-buffer)
       ("e" "Show stderr" eglot-stderr-buffer)]])
-  
+
   :bind (:map eglot-mode-map
-	      ("C-c l" . my/eglot-menu)))
+              ("C-c l" . my/eglot-menu)))
 
 (use-package eldoc
   :ensure nil
@@ -382,23 +383,23 @@
       ("R" "Disabled backends" flymake-disabled-backends)
       ("b" "Reporting backends" flymake-reporting-backends)
       ("m" "Mode line" flymake-mode)]])
-  
+
   :bind (:map flymake-mode-map
-	      ("C-c !" . my/flymake-menu)))
-  
+              ("C-c !" . my/flymake-menu)))
+
 (use-package magit
   :ensure t
   :bind (("C-x g" . magit-status)
-	 ("C-x M-g" . magit-dispatch)
-	 ("C-c M-g" . magit-file-dispatch))
+         ("C-x M-g" . magit-dispatch)
+         ("C-c M-g" . magit-file-dispatch))
   :custom
   (magit-diff-refine-hunk t)
   :config
   (add-to-list 'display-buffer-alist
-	       '("^\\*magit"
-		 (display-buffer-in-side-window)
-		 (side . bottom)
-		 (window-height . 15)))
+               '("^\\*magit"
+                 (display-buffer-in-side-window)
+                 (side . bottom)
+                 (window-height . 15)))
   :custom-face
   (magit-bisect-bad ((t (:inherit my-status-bad-base))))
   (magit-bisect-good ((t (:inherit my-status-good-base))))
@@ -558,7 +559,7 @@
   :hook
   ((kill-emacs . #'persp-state-save)
    (project-switch-project . (lambda ()
-			       (persp-switch (project-name (project-current))))))
+                               (persp-switch (project-name (project-current))))))
   :init
   (persp-mode))
 
