@@ -560,8 +560,15 @@
   ((kill-emacs . #'persp-state-save)
    (project-switch-project . (lambda ()
                                (persp-switch (project-name (project-current))))))
-  :init
-  (persp-mode))
+  :config
+  ;; Enable perspective-mode after frame is created (daemon-safe)
+  (if (daemonp)
+      (add-hook 'after-make-frame-functions
+                (lambda (frame)
+                  (with-selected-frame frame
+                    (unless (bound-and-true-p persp-mode)
+                      (persp-mode 1)))))
+    (persp-mode 1)))
 
 (use-package rustic
   :ensure t
