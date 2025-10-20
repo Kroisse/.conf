@@ -267,14 +267,14 @@
   :ensure t)
 
 (use-package monet
-  :vc (:url "https://github.com/stevemolitor/monet" :rev :newest))
+  :vc (:url "https://github.com/stevemolitor/monet"
+            :rev "72a18d372fef4b0971267bf13f127dcce681859a"))
 
 (use-package claude-code
   :ensure nil
   :after (vterm transient)
   :vc (:url "https://github.com/stevemolitor/claude-code.el"
-            :rev :newest
-            :branch "main")
+            :rev "becece683bcf60f7b150a87a30ef14885dcf8ce3")
   :custom
   (claude-code-terminal-backend 'vterm)
   (claude-code-vterm-buffer-multiline-output t)
