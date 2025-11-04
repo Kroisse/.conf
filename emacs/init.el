@@ -81,12 +81,21 @@
 (use-package emacs
   :ensure nil
   :config
-  (load-theme 'tango t)
   (set-face-attribute 'default nil :family "Noto Sans Mono" :height 80)
   (set-fontset-font t 'latin (font-spec :family "Fira Code" :weight 'normal))
   (set-fontset-font t 'unicode "Noto Color Emoji" nil 'prepend)
   (set-fontset-font t 'hangul (font-spec :family "Noto Sans"))
   (set-fontset-font t 'symbol (font-spec :family "Symbola") nil 'prepend))
+
+(use-package stimmung-themes
+  :demand t
+  :ensure t
+  :custom-face
+  (whitespace-indentation ((t (:background "gainsboro" :foreground "darkred"))))
+  (whitespace-line ((t (:background "gainsboro" :foreground "darkred" :weight bold))))
+  (whitespace-newline ((t (:foreground "gray"))))
+  (whitespace-space ((t (:foreground "gray"))))
+  :config (stimmung-themes-load-light))
 
 (use-package transient :ensure nil)
 
@@ -265,6 +274,18 @@
 
 (use-package flycheck
   :ensure t)
+
+(use-package agent-shell
+  :ensure t
+  :hook (agent-shell-mode . (lambda ()
+                              (whitespace-mode -1)
+                              (agent-shell-completion-mode 1)))
+  :config
+  (add-to-list 'display-buffer-alist
+               '((derived-mode . agent-shell-mode)
+                 (display-buffer-in-side-window)
+                 (side . right)
+                 (window-width . 100))))
 
 (use-package monet
   :vc (:url "https://github.com/stevemolitor/monet"
