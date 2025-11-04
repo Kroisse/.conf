@@ -47,13 +47,16 @@
  '(whitespace-line-column 120)
  '(whitespace-style
    '(face trailing tabs lines newline missing-newline-at-eof empty
-	  indentation space-after-tab space-before-tab tab-mark
-	  newline-mark)))
+          indentation space-after-tab space-before-tab tab-mark
+          newline-mark)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(whitespace-indentation ((t (:background "gainsboro" :foreground "darkred"))))
+ '(whitespace-line ((t (:background "gainsboro" :foreground "darkred" :weight bold))))
+ '(whitespace-newline ((t (:foreground "gray"))))
+ '(whitespace-space ((t (:foreground "gray")))))
 
 ;;; custom.el ends here
