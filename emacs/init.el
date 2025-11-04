@@ -224,7 +224,7 @@
      (project-find-regexp "Find regexp")
      (project-find-dir "Find directory")
      (project-vterm "Terminal" ?t)
-     (claude-code "Claude Code" ?c)
+     (agent-shell-anthropic-start-claude-code "Claude Code" ?c)
      (magit-project-status "Magit" ?g)))
   :config
   (add-to-list 'project-vc-extra-root-markers ".clangd")
@@ -285,30 +285,13 @@
                '((derived-mode . agent-shell-mode)
                  (display-buffer-in-side-window)
                  (side . right)
-                 (window-width . 100))))
+                 (window-width . 100)))
+  :bind (:map agent-shell-mode-map
+              ("C-c c" . agent-shell-help-menu)))
 
 (use-package monet
   :vc (:url "https://github.com/stevemolitor/monet"
             :rev "72a18d372fef4b0971267bf13f127dcce681859a"))
-
-(use-package claude-code
-  :ensure nil
-  :after (vterm transient)
-  :vc (:url "https://github.com/stevemolitor/claude-code.el"
-            :rev "becece683bcf60f7b150a87a30ef14885dcf8ce3")
-  :custom
-  (claude-code-terminal-backend 'vterm)
-  (claude-code-vterm-buffer-multiline-output t)
-  :config
-  (claude-code-mode)
-  (add-to-list 'display-buffer-alist
-               '("^\\*claude"
-                 (display-buffer-in-side-window)
-                 (side . right)
-                 (window-width . 100)))
-  (add-hook 'claude-code-process-environment-functions #'monet-start-server-function)
-  (monet-mode 1)
-  :bind-keymap ("C-c c" . claude-code-command-map))
 
 (use-package compile
   :ensure nil
