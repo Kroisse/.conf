@@ -37,6 +37,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     fi
 fi
 
+which direnv &>/dev/null && eval "$(direnv hook zsh)"
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 test -e "$HOME/.cargo/bin" && export PATH="$HOME/.cargo/bin:$PATH"
 
