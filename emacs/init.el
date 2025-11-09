@@ -212,7 +212,9 @@
           (dockerfile . ("https://github.com/camdencheek/tree-sitter-dockerfile"))
           (json . ("https://github.com/tree-sitter/tree-sitter-json"))
           (toml . ("https://github.com/tree-sitter/tree-sitter-toml"))
-          (yaml . ("https://github.com/tree-sitter-grammars/tree-sitter-yaml"))))
+          (yaml . ("https://github.com/tree-sitter-grammars/tree-sitter-yaml"))
+          (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))
+          (tsx . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src"))))
 
   ;; Auto-mode mappings
   (dolist (mode '(("/CMakeLists\\.txt\\'" . cmake-ts-mode)
@@ -224,7 +226,9 @@
                   ("\\.ya?ml\\'" . yaml-ts-mode)
                   ("\\.hpp\\'" . c++-mode)
                   ("\\.h\\'" . c++-mode)
-                  ("\\.rs\\'" . rustic-mode)))
+                  ("\\.rs\\'" . rustic-mode)
+                  ("\\.ts\\'" . typescript-ts-mode)
+                  ("\\.tsx\\'" . typescript-ts-mode)))
     (add-to-list 'auto-mode-alist mode)))
 
 (use-package vterm
