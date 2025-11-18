@@ -274,33 +274,9 @@
            (compile-command (or project-compile-command compile-command)))
       (counsel-compile)))
 
-  (transient-define-prefix my/project-menu ()
-    "Project management menu"
-    [["Find & Search"
-      ("f" "Find file" project-find-file)
-      ("d" "Find directory" project-find-dir)
-      ("r" "Find regexp" project-find-regexp)
-      ("R" "Query replace" project-query-replace-regexp)]
-     ["Buffers & Windows"
-      ("b" "Switch to buffer" project-switch-to-buffer)
-      ("B" "List buffers" project-list-buffers)
-      ("k" "Kill buffers" project-kill-buffers)
-      ("D" "Dired" project-dired)]
-     ["Build & Run"
-      ("c" "Compile" my/project-counsel-compile)
-      ("C" "Configure compile" (lambda () (interactive) (let ((current-prefix-arg '(4))) (call-interactively #'project-compile))))
-      ("v" "Vterm" project-vterm)]
-     ["Project Management"
-      ("p" "Switch project" project-switch-project)
-      ("P" "Forget zombie projects" project-forget-zombie-projects)
-      ("!" "Execute shell command" project-shell-command)
-      ("&" "Async shell command" project-async-shell-command)
-      ("g" "Magit status" magit-project-status)]])
-
   :bind 
   (("C-x b" . project-switch-to-buffer)
    (:map project-prefix-map
-         ("m" . my/project-menu)
          ("c" . my/project-counsel-compile))))
 
 (use-package flycheck
