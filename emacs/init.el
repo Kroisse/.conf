@@ -72,9 +72,14 @@
     (let ((dedicated (window-dedicated-p)))
       (set-window-dedicated-p (selected-window) (not dedicated))
       (message "Window %s" (if dedicated "undedicated" "dedicated"))))
+  (defun my/kill-this-buffer ()
+    "Kill current buffer without prompt."
+    (interactive)
+    (kill-buffer (current-buffer)))
   :bind (("C-\\" . toggle-input-method)
          ("C-x \\" . toggle-input-method)
          ; ("C-SPC" . toggle-input-method)
+         ("C-x k" . my/kill-this-buffer)
          ("C-c w d" . my/toggle-window-dedicated)
          ("C-t" . nil)))
 
@@ -268,9 +273,11 @@
       ("&" "Async shell command" project-async-shell-command)
       ("g" "Magit status" magit-project-status)]])
 
-  :bind (:map project-prefix-map
-              ("m" . my/project-menu)
-              ("c" . my/project-counsel-compile)))
+  :bind 
+  (("C-x b" . project-switch-to-buffer)
+   (:map project-prefix-map
+         ("m" . my/project-menu)
+         ("c" . my/project-counsel-compile))))
 
 (use-package flycheck
   :ensure t)
@@ -548,6 +555,7 @@
   :config
   (ace-window-display-mode 1))
 
+(if nil
 (use-package perspective
   :ensure t
   :after (counsel project)
@@ -560,6 +568,9 @@
   (persp-interactive-completion-function #'ivy-completing-read)
   (persp-state-default-file (expand-file-name "persp-state" user-emacs-directory))
   (persp-show-modestring 'header)
+  ;; Share perspectives across frames
+  (persp-purge-initial-persp-on-save nil)
+  (persp-sort 'created)
   :hook
   ((kill-emacs . #'persp-state-save)
    (project-switch-project . (lambda ()
@@ -571,8 +582,15 @@
                 (lambda (frame)
                   (with-selected-frame frame
                     (unless (bound-and-true-p persp-mode)
-                      (persp-mode 1)))))
-    (persp-mode 1)))
+                      (persp-mode 1)
+                      ;; Load saved state if it exists
+                      (when (file-exists-p persp-state-default-file)
+                        (persp-state-load persp-state-default-file))))))
+    (persp-mode 1)
+    ;; Load saved state on initial startup
+    (when (file-exists-p persp-state-default-file)
+      (persp-state-load persp-state-default-file))))
+)
 
 (use-package rustic
   :ensure t
