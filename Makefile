@@ -4,7 +4,6 @@ ALACRITTY_D := $(HOME)/.config/alacritty
 CLAUDE_D := $(HOME)/.claude
 EMACS_D := $(HOME)/.emacs.d
 EMACS_INIT := $(HOME)/.emacs.d/init.el
-EMACS_CUSTOM := $(HOME)/.emacs.d/custom.el
 GITCONFIG := $(HOME)/.gitconfig
 GITIGNORE := $(HOME)/.gitignore_global
 TMUX_CONF := $(HOME)/.tmux.conf
@@ -27,9 +26,8 @@ install-claude:
 
 install-emacs:
 	mkdir -p $(EMACS_D)
-	-rm -i $(EMACS_INIT) $(EMACS_CUSTOM)
+	-rm -i $(EMACS_INIT)
 	ln -s $(TOP)emacs/init.el $(EMACS_INIT)
-	ln -s $(TOP)emacs/custom.el $(EMACS_CUSTOM)
 
 install-git:
 	-rm -i $(GITCONFIG) $(GITIGNORE)
