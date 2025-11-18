@@ -57,6 +57,19 @@
   (show-paren-mode t)                  ; Highlight matching parens
   (column-number-mode t)               ; Show column number in mode line
   (delete-selection-mode t)            ; Replace selected text when typing
+  ;; Auto-save settings
+  (auto-save-no-message t)
+  (auto-save-visited-mode t)
+  ;; Exit confirmation
+  (confirm-kill-emacs 'y-or-n-p)
+  ;; Display settings
+  (recenter-redisplay nil)
+  ;; Whitespace settings
+  (global-whitespace-mode t)
+  (whitespace-line-column 120)
+  (whitespace-style '(face trailing tabs lines newline missing-newline-at-eof empty
+                           indentation space-after-tab space-before-tab tab-mark
+                           newline-mark))
   :config
   (prefer-coding-system 'utf-8)
   (set-language-environment "UTF-8")
@@ -155,6 +168,12 @@
   :ensure t
   :init
   (dirvish-override-dired-mode)
+  :custom
+  (dirvish-attributes '(file-time file-size subtree-state collapse git-msg vc-state))
+  (dirvish-mode-line-format '(:left (sort symlink) :right (omit index)))
+  (dirvish-side-attributes '(vc-state))
+  (dirvish-side-follow-mode t)
+  (dirvish-subtree-state-style 'plus)
   :hook
   (dirvish-mode . (lambda () (setq-local global-hl-line-mode nil)))
   :bind
@@ -168,6 +187,9 @@
             :branch "main")
   :ensure t
   :hook (prog-mode . copilot-mode)
+  :config
+  (add-to-list 'warning-suppress-log-types '(copilot copilot-no-mode-indent))
+  (add-to-list 'warning-suppress-log-types '(copilot copilot-exceeds-max-char))
   :bind (:map copilot-completion-map
               ("<tab>" . copilot-accept-completion)
               ("TAB" . copilot-accept-completion)
@@ -216,6 +238,8 @@
   (vterm-disable-underline t)
   (vterm-disable-inverse-video t)
   (vterm-max-scrollback 10000)
+  (vterm-clear-scrollback-when-clearing t)
+  (vterm-min-window-width 40)
   :config
   (setq vterm-toggle-use-dedicated-buffer t)
   (setq vterm-always-compile-module t))
@@ -302,6 +326,8 @@
 
 (use-package compile
   :ensure nil
+  :custom
+  (compilation-scroll-output 'first-error)
   :hook (compilation-mode . (lambda ()
                               (setq-local scroll-conservatively 10000)))
   :config
@@ -600,7 +626,8 @@
   (rustic-format-on-save t)
   (rustic-lsp-client 'eglot)
   :config
-  (setq rustic-format-trigger 'on-save))
+  (setq rustic-format-trigger 'on-save)
+  (put 'rustic-indent-offset 'safe-local-variable 'integerp))
 
 (use-package editorconfig
   :ensure nil
