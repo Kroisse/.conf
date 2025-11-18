@@ -28,6 +28,11 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     [[ -d /usr/local/share/zsh-completions ]] && fpath=(/usr/local/share/zsh-completions $fpath)
 fi
 
+# Add oh-my-zsh custom completions
+if [[ -d ~/.oh-my-zsh/custom/completions ]]; then
+    fpath=(~/.oh-my-zsh/custom/completions $fpath)
+fi
+
 # Initialize Homebrew if available (macOS only)
 if [[ "$OSTYPE" == "darwin"* ]]; then
     if [[ -x /opt/homebrew/bin/brew ]]; then
