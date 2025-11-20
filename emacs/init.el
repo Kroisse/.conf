@@ -252,14 +252,14 @@
    '((project-find-file "Find file")
      (project-find-regexp "Find regexp")
      (project-find-dir "Find directory")
-     (project-vterm "Terminal" ?t)
+     (my/project-vterm "Terminal" ?t)
      (agent-shell-anthropic-start-claude-code "Claude Code" ?c)
      (magit-project-status "Magit" ?g)))
   :config
   (add-to-list 'project-vc-extra-root-markers ".clangd")
 
   ;; Add vterm to project switch commands
-  (defun project-vterm ()
+  (defun my/project-vterm ()
     "Start vterm in the current project's root."
     (interactive)
     (let* ((default-directory (project-root (project-current t)))
@@ -277,7 +277,8 @@
   :bind 
   (("C-x b" . project-switch-to-buffer)
    (:map project-prefix-map
-         ("c" . my/project-counsel-compile))))
+         ("c" . my/project-counsel-compile)
+         ("t" . my/project-vterm))))
 
 (use-package flycheck
   :ensure t)
