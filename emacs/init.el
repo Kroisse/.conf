@@ -344,7 +344,7 @@
       ("t" "Find type definition" eglot-find-typeDefinition)
       ("i" "Find implementation" eglot-find-implementation)
       ("r" "Find references" xref-find-references)
-      ("b" "Go back" xref-go-back)]
+      ("b" "Go back" xref-go-back :transient t)]
      ["Code Actions"
       ("a" "Code actions" eglot-code-actions)
       ("R" "Rename" eglot-rename)
@@ -360,7 +360,8 @@
       ("S" "Start/restart server" eglot-reconnect)
       ("Q" "Shutdown server" eglot-shutdown)
       ("=" "Show events" eglot-events-buffer)
-      ("e" "Show stderr" eglot-stderr-buffer)]])
+      ("e" "Show stderr" eglot-stderr-buffer)
+      ("q" "Quit" transient-quit-one)]])
 
   :bind (:map eglot-mode-map
               ("C-c l" . my/eglot-menu)))
@@ -396,7 +397,8 @@
       ("r" "Running backends" flymake-running-backends)
       ("R" "Disabled backends" flymake-disabled-backends)
       ("b" "Reporting backends" flymake-reporting-backends)
-      ("m" "Mode line" flymake-mode)]])
+      ("m" "Mode line" flymake-mode)
+      ("q" "Quit" transient-quit-one)]])
 
   :bind (:map flymake-mode-map
               ("C-c !" . my/flymake-menu)))
