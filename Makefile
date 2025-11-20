@@ -8,9 +8,10 @@ GITCONFIG := $(HOME)/.gitconfig
 GITIGNORE := $(HOME)/.gitignore_global
 TMUX_CONF := $(HOME)/.tmux.conf
 VSCODE_SETTINGS := $(HOME)/Library/Application\ Support/Code/User/settings.json
+ZELLIJ_CONF := $(HOME)/.config/zellij/config.kdl
 ZSHRC := $(HOME)/.zshrc
 
-install: install-alacritty install-claude install-emacs install-git install-tmux install-vscode install-zsh
+install: install-alacritty install-claude install-emacs install-git install-tmux install-vscode install-zellij install-zsh
 
 install-alacritty:
 	-rm -ri $(ALACRITTY_D)
@@ -41,6 +42,11 @@ install-tmux:
 install-vscode:
 	-rm -i $(VSCODE_SETTINGS)
 	ln -s $(TOP)vscode/settings.json $(VSCODE_SETTINGS)
+
+install-zellij:
+	mkdir -p $(dir $(ZELLIJ_CONF))
+	-rm -i $(ZELLIJ_CONF)
+	ln -s $(TOP)zellij/config.kdl $(ZELLIJ_CONF)
 
 install-zsh: $(HOME)/.oh-my-zsh
 	@if command -v brew >/dev/null 2>&1; then \
