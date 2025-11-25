@@ -2,6 +2,7 @@
 name: git-expert
 description: Use this agent when you need help with git operations, commit message formatting, branching strategies, or repository management. PROACTIVELY use this agent when creating git commits to ensure proper Conventional Commit formatting.
 tools: Glob, Grep, LS, ExitPlanMode, Read, NotebookRead, TodoWrite, Bash
+model: haiku
 color: orange
 ---
 
