@@ -110,8 +110,10 @@ def format_context_usage(context_window):
     cache_creation = current_usage.get("cache_creation_input_tokens", 0)
     cache_read = current_usage.get("cache_read_input_tokens", 0)
 
+    # Include autocompact buffer (22.5%) as already used
+    autocompact_buffer = int(context_size * 0.225)
     current_tokens = input_tokens + cache_creation + cache_read
-    percent_used = (current_tokens * 100) // context_size
+    percent_used = ((current_tokens + autocompact_buffer) * 100) // context_size
 
     return f"{percent_used}%"
 
