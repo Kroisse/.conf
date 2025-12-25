@@ -94,20 +94,26 @@ def get_display_path(current_dir):
     return current_dir
 
 
-def format_cost(cost_usd):
-    """Format cost in USD as a readable string."""
-    if cost_usd is None or cost_usd == 0:
+def format_context_usage(context_window):
+    """Format context window usage as a percentage."""
+    if not context_window:
         return ""
 
-    # Format cost with appropriate precision
-    if cost_usd >= 1:
-        return f"${cost_usd:.2f}"
-    elif cost_usd >= 0.01:
-        return f"${cost_usd:.2f}"
-    elif cost_usd >= 0.001:
-        return f"${cost_usd:.3f}"
-    else:
-        return f"${cost_usd:.4f}"
+    context_size = context_window.get("context_window_size", 0)
+    current_usage = context_window.get("current_usage")
+
+    if not context_size or not current_usage:
+        return ""
+
+    # Calculate current context tokens
+    input_tokens = current_usage.get("input_tokens", 0)
+    cache_creation = current_usage.get("cache_creation_input_tokens", 0)
+    cache_read = current_usage.get("cache_read_input_tokens", 0)
+
+    current_tokens = input_tokens + cache_creation + cache_read
+    percent_used = (current_tokens * 100) // context_size
+
+    return f"{percent_used}%"
 
 
 def generate_status_line(input_data):
@@ -118,7 +124,7 @@ def generate_status_line(input_data):
     # Extract data from input
     current_dir = input_data.get("workspace", {}).get("current_dir", "/")
     model_name = input_data.get("model", {}).get("display_name", "Unknown")
-    cost_usd = input_data.get("cost", {}).get("total_cost_usd")
+    context_window = input_data.get("context_window", {})
 
     # Ensure we can access the directory
     if not os.path.exists(current_dir):
@@ -128,7 +134,7 @@ def generate_status_line(input_data):
     chroot_prefix = get_debian_chroot_prefix()
     display_path = get_display_path(current_dir)
     git_branch = get_git_branch(current_dir)
-    formatted_cost = format_cost(cost_usd)
+    context_usage = format_context_usage(context_window)
 
     # Format the status line
     status_line = (
@@ -138,10 +144,10 @@ def generate_status_line(input_data):
         f"🤖 {COLORS['green']}{model_name}{COLORS['reset']}"
     )
 
-    # Add cost if available
-    if formatted_cost:
+    # Add context usage if available
+    if context_usage:
         status_line += (
-            f" 💰{COLORS['yellow']}{formatted_cost}{COLORS['reset']}"
+            f" 📊 {COLORS['yellow']}{context_usage}{COLORS['reset']}"
         )
 
     return status_line
