@@ -1,3 +1,8 @@
+---
+description: Create a GitHub pull request
+model: claude-sonnet-4-5
+---
+
 I need you to create a GitHub pull request by analyzing the changes in this branch.
 
 Please PROACTIVELY use the git-expert agent to:

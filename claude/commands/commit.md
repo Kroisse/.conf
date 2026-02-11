@@ -1,3 +1,8 @@
+---
+description: Create a git commit
+model: claude-sonnet-4-5
+---
+
 PROACTIVELY use the git-expert agent when creating git commits to ensure proper Conventional Commit formatting and commit message quality.
 PREFER atomic commits.
 Check git status and recent commits to understand the current state.
