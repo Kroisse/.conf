@@ -1,6 +1,6 @@
 ---
 description: Create a git commit
-model: claude-sonnet-4-5
+model: claude-sonnet-4-6
 ---
 
 PROACTIVELY use the git-expert agent when creating git commits to ensure proper Conventional Commit formatting and commit message quality.
@@ -12,3 +12,4 @@ Draft an appropriate commit message following Conventional Commits format (type:
 Use "refactor" type only when code structure changes without altering functionality or behavior - avoid using it for changes that modify features or fix issues.
 Stage any relevant untracked files.
 Create the commit with a clear, concise message that accurately describes the changes and their purpose.
+If the commit fails due to a commit hook, do NOT attempt to fix the issue. Stop immediately and report the failure back to the main agent.
